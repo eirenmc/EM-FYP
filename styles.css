@@ -1,0 +1,174 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+/* Navigation CSS */
+#nav2{
+    height:50px;
+}
+
+#nav2{
+    background: #558428;
+    color:white;
+    height:50px;
+}
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.wrap{ 
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height:28px;
+  margin-left:6.5%;
+}
+
+.wrap2{ 
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height:28px;
+}
+
+.flex-menu-item{
+    margin-left:4%;
+    margin-top:14px;
+}
+
+.flex-menu-item-s{
+    margin-left:1%;
+    margin-top:14px;
+}
+
+img[alt*="BuyLocal"]{
+    width:45px;
+    float:left;
+    margin-top:4px;
+    margin-left:15px;
+}
+
+#search{
+    height:25px;
+    border-radius: 5px;
+}
+
+.container-1{
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+
+.container-1 input#search{
+  width: 250px;
+  height: 30px;
+  margin-top:5px;
+  margin-left:20%;
+  background: white;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #63717f;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.container-1 input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+ 
+.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;  
+}
+ 
+.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;  
+}
+ 
+.container-1 input#search:-ms-input-placeholder {  
+   color: #65737e;  
+}
+
+.container-1 .icon{
+  position: absolute;
+  top: 2%;
+  margin-top:7px;
+  margin-left:5%;
+  z-index: 1;
+  color:white;
+}
+
+/* End */
+/* Product CSS */
+.productBox{
+    border: 2px black;
+}
+
+img[alt="product"]{
+    width:80px;
+    height:80px;
+}
+
+/*Star Rating */
+.star-five {
+   margin: 50px 0;
+   position: relative;
+   display: block;
+   color: red;
+   width: 0px;
+   height: 0px;
+   border-right:  100px solid transparent;
+   border-bottom: 70px  solid red;
+   border-left:   100px solid transparent;
+   -moz-transform:    rotate(35deg);
+   -webkit-transform: rotate(35deg);
+   -ms-transform:     rotate(35deg);
+   -o-transform:      rotate(35deg);
+}
+.star-five:before {
+   border-bottom: 80px solid red;
+   border-left: 30px solid transparent;
+   border-right: 30px solid transparent;
+   position: absolute;
+   height: 0;
+   width: 0;
+   top: -45px;
+   left: -65px;
+   display: block;
+   content: '';
+   -webkit-transform: rotate(-35deg);
+   -moz-transform:    rotate(-35deg);
+   -ms-transform:     rotate(-35deg);
+   -o-transform:      rotate(-35deg);
+
+}
+.star-five:after {
+   position: absolute;
+   display: block;
+   color: red;
+   top: 3px;
+   left: -105px;
+   width: 0px;
+   height: 0px;
+   border-right: 100px solid transparent;
+   border-bottom: 70px solid red;
+   border-left: 100px solid transparent;
+   -webkit-transform: rotate(-70deg);
+   -moz-transform:    rotate(-70deg);
+   -ms-transform:     rotate(-70deg);
+   -o-transform:      rotate(-70deg);
+   content: '';
+}
