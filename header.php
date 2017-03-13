@@ -10,19 +10,15 @@
             <ul class="flex-container wrap">
                 <li class="flex-menu-item">About</li>
                 <li class="flex-menu-item">Producers</li>
+                <li class="flex-menu-item">Favourites</li>
             </ul>
             <ul class="flex-container wrap">
             </ul>
-            <!--<div>About</div>
-            <div>Food & Drink</div>
-            <div>Boxed Offers</div>
-            <div>Special Offers</div>
-            <div>Favourites</div>
             <div class="alignLeft">
             </div>
-            <div> <img src="basket.png" alt="basket icon"/> </div>
-            <div> <img src="userLogin.png" alt="Login/Sign up icon"/> </div>
-            <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div>-->
+            <div> <img src="images/basket.png" alt="basket icon"/> </div>
+            <div> <img src="images/login.png" alt="Login/Sign up icon"/> </div>
+           <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
         </nav>
         <nav id="nav2">
             <ul class="flex-container wrap">
@@ -31,8 +27,7 @@
                 <li class="flex-menu-item">Dairy & Eggs</li>
                 <li class="flex-menu-item">Bakery</li>
                 <li class="flex-menu-item">Drinks</li>
-                <li class="flex-menu-item">Bundles</li>
-                <li class="flex-menu-item">Favourites</li>
+                <li class="flex-menu-item">Bundles</li> 
                 <div class="container-1">
                     <input type="search" id="search" placeholder="Search..." />
                     <span class="icon"><i class="fa fa-search"></i></span>

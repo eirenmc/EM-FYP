@@ -33,7 +33,6 @@ body{
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   height:28px;
-  margin-left:6.5%;
 }
 
 .wrap2{ 
@@ -53,9 +52,16 @@ body{
 }
 
 img[alt*="BuyLocal"]{
-    width:45px;
+    width:50px;
     float:left;
-    margin-top:4px;
+    margin-top:3px;
+    margin-left:15px;
+}
+
+img[alt*="icon"]{
+    width:50px;
+    float:left;
+    margin-top:3px;
     margin-left:15px;
 }
 
@@ -72,7 +78,7 @@ img[alt*="BuyLocal"]{
 
 .container-1 input#search{
   width: 250px;
-  height: 30px;
+  height: 40px;
   margin-top:5px;
   margin-left:20%;
   background: white;
@@ -80,7 +86,7 @@ img[alt*="BuyLocal"]{
   font-size: 10pt;
   float: left;
   color: #63717f;
-  padding-left: 45px;
+  padding-left: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -105,6 +111,8 @@ img[alt*="BuyLocal"]{
 .container-1 .icon{
   position: absolute;
   top: 2%;
+  width:80px;
+  height:80px;
   margin-top:7px;
   margin-left:5%;
   z-index: 1;
