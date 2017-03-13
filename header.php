@@ -12,14 +12,18 @@
                 <li class="flex-menu-item">Producers</li>
                 <li class="flex-menu-item">Favourites</li>
             </ul>
-            <ul class="flex-container wrap">
-            </ul>
-            <div class="alignLeft">
-            </div>
-            <div> <img src="images/basket.png" alt="basket icon"/> </div>
-            <div> <img src="images/login.png" alt="Login/Sign up icon"/> </div>
+            <span class="menu-item-right">   
+                <img src="images/basket.png" alt="basket icon" class="menu-item-right"/>
+                <img src="images/login.png" alt="Login/Sign up icon" class="menu-item-right"/>
+                <b> Hi Mary, </b><em>Your Account</em>
+            </span>    
+            
+           
            <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
         </nav>
+        <br>
+        <br>
+        <br>
         <nav id="nav2">
             <ul class="flex-container wrap">
                 <li class="flex-menu-item-s">Fruit & Veg</li>

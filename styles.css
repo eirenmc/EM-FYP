@@ -20,15 +20,19 @@ body{
   padding: 0;
   margin: 0;
   list-style: none;
-  -ms-box-orient: horizontal;
+ /* -ms-box-orient: horizontal;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -moz-flex;
   display: -webkit-flex;
-  display: flex;
+  display: flex;*/
 }
 
+ul{
+    width:80%;
+}
+/*
 .wrap{ 
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -40,10 +44,16 @@ body{
   flex-wrap: wrap;
   height:28px;
 }
+*/
 
 .flex-menu-item{
     margin-left:4%;
     margin-top:14px;
+    float:left;
+}
+
+.menu-item-right{
+    float:right;
 }
 
 .flex-menu-item-s{
@@ -59,10 +69,10 @@ img[alt*="BuyLocal"]{
 }
 
 img[alt*="icon"]{
-    width:50px;
-    float:left;
+    height:35px;
+    padding:8px;
     margin-top:3px;
-    margin-left:15px;
+    margin-right:20%;
 }
 
 #search{
@@ -74,6 +84,7 @@ img[alt*="icon"]{
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
+  float:right;
 }
 
 .container-1 input#search{
@@ -111,8 +122,6 @@ img[alt*="icon"]{
 .container-1 .icon{
   position: absolute;
   top: 2%;
-  width:80px;
-  height:80px;
   margin-top:7px;
   margin-left:5%;
   z-index: 1;
