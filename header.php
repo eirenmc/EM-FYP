@@ -13,13 +13,13 @@
 <nav id="Nav1">
     <img src="images/logo.png" alt="BuyLocal logo"/>
     <ul class="flex-container wrap left">
-        <li class="flex-menu-item">About</li>
+       <b> <li class="flex-menu-item">About</li>
         <li class="flex-menu-item">Producers</li>
-        <li class="flex-menu-item">Favourites</li>
+        <li class="flex-menu-item">Favourites</li></b>
     </ul>
     <ul class="flex-container wrap right">
         <b><li class="flex-menu-item">Your Account &#9660; </li></b>
-        <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav"/></li>
+        <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
         <li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li>
     </ul>
     <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
@@ -41,3 +41,38 @@
         </div>
     </ul>
 </nav>
+
+<div id="id01" class="modal">
+    <div class="content animate">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/loginUser.php">
+            <div class="container">
+                <br>
+                <center><h2>Login to your Buy Local Account</h2>
+                <img src="images/logo.png" alt="logo" width="150px"/><br><br>
+                <label>Username :</label>
+                <input type="text" placeholder="Enter Username" name="uname" class="field" required>
+                <br><br>
+                <label>Password :</label>
+                <input type="password" placeholder="Enter Password" name="psw" class="field" required>
+                <br><br>
+                <button class="button" type="submit">Login</button>
+                </center>
+            </div>
+        </form>
+        
+        <div class="container">
+            <br><center><h3>Or</h3>
+        <a href="register.php"><button class="button">Register an Account</button></a></center><br>
+        </div>
+    </div>
+<!--
+    <div class="container" style="background-color:#f1f1f1">
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>-->
+  
+</div>
+
+<script>
+
+</script>
