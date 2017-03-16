@@ -18,7 +18,7 @@
         <li class="flex-menu-item">Favourites</li>
     </ul>
     <ul class="flex-container wrap right">
-        <b><li class="flex-menu-item">Mary's Account &#9660; </li></b>
+        <b><li class="flex-menu-item">Your Account &#9660; </li></b>
         <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav"/></li>
         <li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li>
     </ul>

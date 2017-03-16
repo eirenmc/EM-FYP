@@ -111,7 +111,7 @@ img[alt*="nav"]{
   white-space: nowrap;
   position: relative;
  /* float:right;*/
- margin-left: 65%;
+ margin-left: 64%;
 }
 
 .container-1 input#search{
@@ -163,8 +163,8 @@ img[alt*="nav"]{
 /* End */
 /* Product CSS */
 .productBox{
-    border: solid green;
-    padding:2%;
+    border: solid #558428;
+    /*padding:1%;*/
     /*width:31%;*/
 }
 
@@ -174,7 +174,7 @@ img[alt="product"]{
 }
 
 /*Star Rating */
-.star-five {
+/*.star-five {
    margin: 50px 0;
    position: relative;
    display: block;
@@ -223,7 +223,7 @@ img[alt="product"]{
    -ms-transform:     rotate(-70deg);
    -o-transform:      rotate(-70deg);
    content: '';
-}
+}*/
 
 .rating {
   unicode-bidi: bidi-override;
@@ -288,4 +288,25 @@ img[alt*="front"]{
 
 .rate{
     margin-left:15px;
+    margin-bottom:20px;
+}
+
+.btn{
+    width:100%;
+    background-color: white;
+    border: none;
+    border-top: solid #558428;
+    border-bottom: solid #558428;
+    padding: 3% 0%;
+    margin-top:5%;
+}
+
+.btn2{
+    width:100%;
+    background-color:#558428;
+    color:white;
+    border: none;
+    border-top: solid #558428;
+    border-bottom: solid #558428;
+    padding: 3% 0%;
 }

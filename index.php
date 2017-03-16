@@ -32,7 +32,8 @@
             <h3> Top Pick</h3>
         </center>
         <div class="flex-container-frontPage">
-            <div class="flex-item-product productBox">
+            <div class="flex-item-product">
+                <div class="productBox">
                 <?php
                     try{   
                 //Connecting to the database
@@ -92,10 +93,10 @@
                         echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
                         echo "</span>";
                     }
-                    echo "";
+                    echo "<input class='btn ".$row['pId']."' type='submit' value='View Details'>";
                     echo "<form action='products.php' method='GET'>
-                    <input type='hidden'  name='productId' value='".$row['pId']."'> </br>
-                    <input class='btn btn-default ".$row['pId']."' type='submit' value='Add To Cart'></form></br>";
+                    <input type='hidden'  name='productId' value='".$row['pId']."'>
+                    <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
                     echo "</center></div></div>";
                 }
             
