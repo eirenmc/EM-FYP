@@ -11,7 +11,7 @@
     <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
 <!--</nav>-->
 <nav id="Nav1">
-    <img src="images/logo.png" alt="BuyLocal logo"/>
+    <a href="index.php"><img src="images/logo.png" alt="BuyLocal logo"/></a>
     <ul class="flex-container wrap left">
        <b> <li class="flex-menu-item">About</li>
         <li class="flex-menu-item">Producers</li>
@@ -43,7 +43,7 @@
 </nav>
 
 <div id="id01" class="modal">
-    <div class="content animate">
+    <div class="content">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <form class="modal-content" action="/loginUser.php">
             <div class="container">

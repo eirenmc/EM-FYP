@@ -58,37 +58,22 @@
                     
                     //Checks the rating and creates the stars deending on its rating
                     if($row['pRating'] == 5){
-                       /* for($r = 0; $r < 5; $r++){
-                            echo " <div class='star-five'></div>";
-                        }*/
                         echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>";
                         echo "</span>";
                     }else if($row['pRating'] == 4){
-                        /*for($r2 = 0; $r2 < 4; $r2++){
-                            echo " <div class='star-five'></div>";
-                        }*/
                         echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span>";
                         echo "</span>";
                     }else if($row['pRating'] == 3){
-                        /*for($r3 = 0; $r3 < 3; $r3++){
-                            echo " <div class='star-five'></div>";
-                        }*/
                         echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span>";
                         echo "</span>";
                     }else if($row['pRating'] == 2){
-                        /*for($r4 = 0; $r4 < 2; $r4++){
-                            echo " <div class='star-five'></div>";
-                        }*/
                         echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span>";
                         echo "</span>";
                     }else if($row['pRating'] == 1){
-                        /*for($r5 = 0; $r5 < 1; $r5++){
-                            echo " <div class='star-five'></div>";
-                        }*/
                         echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
                         echo "</span>";

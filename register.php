@@ -13,5 +13,38 @@
     <body>
         <?php include "header.php" ?>
 
-        <?php include "footer.php" ?>
+        <div class="forms"><center>
+            <h2> Register an Account </h2>
+            <br>
+            <form action="registerUser.php" method="POST">
+                <div class="form-group">
+                    <b>First Name: </b>
+                    <input type="text" name="fname" id="fname" class="field" maxlength="90" placeholder="First Name" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <b>Last Name: </b>
+                    <input type="text" name="lname" id="lname" class="field" maxlength="90" placeholder="Last Name" required>
+                </div>
+                <br>
+                <div class="form-group">
+                        <b>Username: </b>	
+                        <input type="text" name="uname" id="username" class="field" maxlength="90" placeholder="Username" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <b>Password: </b>
+                        <input type="password" name="password" id="password" class="field" maxlength="90" placeholder="Password" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <b>Email Address: </b>
+                        <input type="email" name="email" id="email" class="field" maxlength="90" placeholder="Email" required>
+                    </div>
+                    <br>
+                <input type="submit" name="submit" class="button" value="Submit"></center>
+            </form>
+        </div>
+
+            <?php include "footer.php" ?>
     </body>

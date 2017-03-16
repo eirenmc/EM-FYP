@@ -388,3 +388,22 @@ img[alt*="front"]{
     color: black; 
     border: 2px solid #558428;
 }
+
+/*Registration Page */
+
+#username, #password, #email, #fname, #lname #address{
+    width:50%;
+    margin: 0% 0% 2% 2%;
+}
+
+.forms{
+    margin:2% auto;
+    padding:2% 0%;
+  background:#DEFFC1;
+    width:50%;
+}
+
+.form-group{
+    text-align: right;
+    margin-right:25%;
+}
