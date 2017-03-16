@@ -28,9 +28,11 @@
             </div>
         </div>
         <br>
+        <center>
+            <h3> Top Pick</h3>
+        </center>
         <div class="flex-container-frontPage">
-            <div class="flex-item-frontPage">
-                <h3> Top Pick</h3>
+            <div class="flex-item-product productBox">
                 <?php
                     try{   
                 //Connecting to the database
@@ -49,52 +51,52 @@
                 //Loops through all the products and displays the image, name, price and ass to cart button
                 for($i=0; $i < count($products); $i++){
                     $row = $products[$i];
-                    echo "<b>".$row['pName']."</b><br><br>";
+                    echo "<center><b>".$row['pName']."</b><br><br>";
                     echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/></br>";
-                    echo "<b> Price: </b> €".$row['pPrice']." <b> Rating: </b>";
+                    echo "<b> Price: </b> €".$row['pPrice']." <b class='rate'> Rating: </b>";
                     
                     //Checks the rating and creates the stars deending on its rating
                     if($row['pRating'] == 5){
                        /* for($r = 0; $r < 5; $r++){
                             echo " <div class='star-five'></div>";
                         }*/
-                        echo "<div class='rating five'>";
+                        echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>";
-                        echo "</div>";
+                        echo "</span>";
                     }else if($row['pRating'] == 4){
                         /*for($r2 = 0; $r2 < 4; $r2++){
                             echo " <div class='star-five'></div>";
                         }*/
-                        echo "<div class='rating five'>";
+                        echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span>";
-                        echo "</div>";
+                        echo "</span>";
                     }else if($row['pRating'] == 3){
                         /*for($r3 = 0; $r3 < 3; $r3++){
                             echo " <div class='star-five'></div>";
                         }*/
-                        echo "<div class='rating five'>";
+                        echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span>";
-                        echo "</div>";
+                        echo "</span>";
                     }else if($row['pRating'] == 2){
                         /*for($r4 = 0; $r4 < 2; $r4++){
                             echo " <div class='star-five'></div>";
                         }*/
-                        echo "<div class='rating five'>";
+                        echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span>";
-                        echo "</div>";
+                        echo "</span>";
                     }else if($row['pRating'] == 1){
                         /*for($r5 = 0; $r5 < 1; $r5++){
                             echo " <div class='star-five'></div>";
                         }*/
-                        echo "<div class='rating five'>";
+                        echo "<span class='rating five'>";
                         echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
-                        echo "</div>";
+                        echo "</span>";
                     }
                     echo "";
                     echo "<form action='products.php' method='GET'>
                     <input type='hidden'  name='productId' value='".$row['pId']."'> </br>
                     <input class='btn btn-default ".$row['pId']."' type='submit' value='Add To Cart'></form></br>";
-                    echo "</div></div>";
+                    echo "</center></div></div>";
                 }
             
             }catch(PDOException $e){
@@ -122,7 +124,7 @@
                 }
             }*/
                 ?>
-                <p> With Buy Local you can be assured that you are buying local ! </p>
+                
             </div>
         </div>
   <?php include "footer.php" ?>

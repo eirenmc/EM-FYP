@@ -164,8 +164,8 @@ img[alt*="nav"]{
 /* Product CSS */
 .productBox{
     border: solid green;
-    padding:4%;
-    width:31%;
+    padding:2%;
+    /*width:31%;*/
 }
 
 img[alt="product"]{
@@ -280,4 +280,12 @@ img[alt*="front"]{
 .flex-item-frontPage{
     width: 60%;
     margin: auto;
+}
+
+.flex-item-product{
+    margin: auto;
+}
+
+.rate{
+    margin-left:15px;
 }
