@@ -23,14 +23,14 @@
         </div>
         <div class="flex-container-frontPage">
             <div class="flex-item-frontPage">
-                <p> Buy Local provides you with easy accessibilty to purchase locally produced products. You can quickly find out about different local producer, where your food is coming from and and guaranteeing you high quality local produce the way you want it.</p>
+                <p> Buy Local provides you with easy accessibilty to purchase locally produced products. You can quickly find out about different local producers, where your food is coming from and and guaranteeing you high quality local produce the way you want it.</p>
                 <p> With Buy Local you can be assured that you are buying local ! </p>
             </div>
         </div>
         <br>
         <div class="flex-container-frontPage">
             <div class="flex-item-frontPage">
-                <p> Top Pick</p>
+                <h3> Top Pick</h3>
                 <?php
                     try{   
                 //Connecting to the database
@@ -49,7 +49,6 @@
                 //Loops through all the products and displays the image, name, price and ass to cart button
                 for($i=0; $i < count($products); $i++){
                     $row = $products[$i];
-                    echo " <div class='col-xs-6 col-md-4 productBox'>";
                     echo "<b>".$row['pName']."</b><br><br>";
                     echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/></br>";
                     echo "<b> Price: </b> €".$row['pPrice']." <b> Rating: </b>";
@@ -91,11 +90,11 @@
                         echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
                         echo "</div>";
                     }
-                    echo ""
+                    echo "";
                     echo "<form action='products.php' method='GET'>
                     <input type='hidden'  name='productId' value='".$row['pId']."'> </br>
                     <input class='btn btn-default ".$row['pId']."' type='submit' value='Add To Cart'></form></br>";
-                    echo "</div>";
+                    echo "</div></div>";
                 }
             
             }catch(PDOException $e){

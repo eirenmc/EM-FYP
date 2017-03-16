@@ -15,11 +15,11 @@ body{
     color:white;
     height:50px;
 }
-
+/*
 .flex-container {
   padding: 0;
   margin: 0;
-  list-style: none;
+  list-style: none;*/
  /* -ms-box-orient: horizontal;
   display: -webkit-box;
   display: -moz-box;
@@ -27,7 +27,30 @@ body{
   display: -moz-flex;
   display: -webkit-flex;
   display: flex;*/
+/*}*/
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+ -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  display:inline;
 }
+.left{
+    width:40%;
+    float:left;    
+}
+.right{
+    width:20%;
+    float:right;
+}
+
 
 ul{
     width:80%;
@@ -78,11 +101,6 @@ img[alt*="nav"]{
     height:35px;
 }
 
-.right{
-    -webkit-align-items: flex-end;
-    align-items: flex-end;
-}
-
 #search{
     height:25px;
     border-radius: 5px;
@@ -92,14 +110,15 @@ img[alt*="nav"]{
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
-  float:right;
+ /* float:right;*/
+ margin-left: 65%;
 }
 
 .container-1 input#search{
   width: 250px;
   height: 40px;
   margin-top:5px;
-  margin-left:20%;
+  margin-left:26%;
   background:#F7F5EF;
   border: none;
   font-size: 10pt;
@@ -129,15 +148,14 @@ img[alt*="nav"]{
 
 .container-1 .icon{
   position: absolute;
-  margin-left:2%;
-  margin-top:2%;
+  margin-left:5px;
+  margin-top:5px;
   z-index: 1;
   color:white;
   border-radius: 5px;
 }
 
 .icon{
-    margin-top:2%;
     padding:10px 20px;
     background-color:#86D03F;
 }
