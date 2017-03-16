@@ -29,7 +29,7 @@
 <br>
 <nav id="nav2">
     <ul class="flex-container wrap">
-        <li class="flex-menu-item">Fruit & Veg</li>
+       <!-- <a href="fruitAndVeg.php">--><li class="flex-menu-item">Fruit & Veg</li><!--</a>-->
         <li class="flex-menu-item">Meat</li>
         <li class="flex-menu-item">Dairy & Eggs</li>
         <li class="flex-menu-item">Bakery</li>
@@ -45,7 +45,7 @@
 <div id="id01" class="modal">
     <div class="content">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/loginUser.php">
+        <form class="modal-content" action="loginUser.php" method="POST">
             <div class="container">
                 <br>
                 <center><h2>Login to your Buy Local Account</h2>
@@ -54,7 +54,7 @@
                 <input type="text" placeholder="Enter Username" name="uname" class="field" required>
                 <br><br>
                 <label>Password :</label>
-                <input type="password" placeholder="Enter Password" name="psw" class="field" required>
+                <input type="password" placeholder="Enter Password" name="password" class="field" required>
                 <br><br>
                 <button class="button" type="submit">Login</button>
                 </center>

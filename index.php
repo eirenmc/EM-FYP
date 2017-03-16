@@ -113,5 +113,12 @@
                 
             </div>
         </div>
+
+        <div class="flex-container-frontPage">
+            <div class="flex-item-frontPage">
+                <h3>Popular Picks </h3>
+                
+            </div>
+        </div>
   <?php include "footer.php" ?>
 </body>
