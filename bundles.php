@@ -1,7 +1,3 @@
-<?php 
-    session_start();
-?>
-
 <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -18,27 +14,16 @@
         <?php include "header.php" ?>
         <br>
         <?php include "filter.php" ?>
-
         <div class="flex-container-prodPage">
             <div class="flex-item-product">
                 <?php
-
-                    global $productCartList;
-
-                    if(isset($_SESSION["productCartList"])){
-                   
-                    }
-                    else{
-                        $_SESSION['productCartList'] = array();
-                    }
-
                     try{   
                         //Connecting to the database
                         $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
                         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                         //Using a prepared statement to select all the products in the products table
-                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
+                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
 
                         //Execute
                         $insertProducts->execute();
@@ -91,29 +76,6 @@
                     }catch(PDOException $e){
                         echo 'ERROR: '.$e -> getMessage();
                     }
-
-                    if(!empty($_GET['productId'])){
-                        //Gets the id stored with each product
-                        $productSelectedId = $_GET["productId"];
-                        
-                        try{
-                            //Connects to database
-                           $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
-                           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                    
-                            
-                            //Using a prepared statement to select the product that matches the id that is attached to the 
-                            $stat = $conn->prepare('SELECT * FROM products WHERE pid = :id');
-                            $stat->bindParam(':id', $productSelectedId);
-                            $stat->execute();
-
-
-                            //Pushes the selected product into the session
-                            array_push($_SESSION['productCartList'],$productSelectedId);                   
-                        }
-                        catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
-                        }
-                }
 
             ?>
                 

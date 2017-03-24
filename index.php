@@ -37,11 +37,11 @@
                 <?php
                     try{   
                 //Connecting to the database
-                $conn = new PDO('mysql:host=localhost; dbname=fyp', 'root', '');
+                $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
                 $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 //Using a prepared statement to select all the products in the products table
-                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pName = 'Vegetable Box'");
+                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pName = 'Vegetable Bundle - Large'");
 
                 //Execute
                 $insertProducts->execute();

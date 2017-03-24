@@ -1,3 +1,7 @@
+<?php
+    //Starts/Resumes sessions
+    session_start();
+?>
 <?php    
     //Variables with the values entered in the input fields of Login
     $uname = $_POST["uname"];
@@ -32,7 +36,7 @@
     function check_login($uname, $password){
         try{
             //Connecting to the database
-            $conn = new PDO('mysql:host=localhost; dbname=fyp', 'root', '');
+            $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
             $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             //Using a prepared statement to select the email and passwords in the databases so they can be cross-referenced

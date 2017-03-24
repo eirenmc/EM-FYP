@@ -1,8 +1,8 @@
-<?php 
+ <?php
+    //Starts/Resumes sessions
     session_start();
 ?>
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -18,35 +18,42 @@
         <?php include "header.php" ?>
         <br>
         <?php include "filter.php" ?>
-
+        
         <div class="flex-container-prodPage">
             <div class="flex-item-product">
                 <?php
 
-                    global $productCartList;
+                    if(!empty($_POST['searchTerm'])){
+                        $term = $_POST['searchTerm'];   
 
-                    if(isset($_SESSION["productCartList"])){
-                   
-                    }
-                    else{
-                        $_SESSION['productCartList'] = array();
-                    }
-
-                    try{   
-                        //Connecting to the database
+                    try{
                         $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
                         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                        //Using a prepared statement to select all the products in the products table
-                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
-
+                        if($term == 'meat' || $term == 'fish' || $term == 'poultry' || $term == 'chicken'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
+                        }else if($term == 'fruit' || $term == 'veg' || $term == 'vegetable'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
+                        }else  if($term == 'juice' || $term == 'drink'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='D'");
+                        }else if($term == 'box' || $term == 'bundle' || $term == 'package' || $term == 'group' || $term == 'deal' || $term == 'offer' || $term == 'saving'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
+                        }else if($term == 'dairy' || $term == 'calcium'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
+                        }else if($term == 'baked' || $term == 'bake' || $term == 'bakery' || $term == 'Home' || $term == 'made' || $term == 'homemade' || $term == 'sugary'){
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
+                        }else{
+                            //Using a prepared statement to select all the products in the products table
+                            $searchProducts = $conn->prepare("SELECT * FROM products WHERE pName LIKE '%{$term}%' OR '{$term}%' OR '%{$term}'");
+                        }
                         //Execute
-                        $insertProducts->execute();
+                        $searchProducts->execute();
 
                         //fetches all the products from the database
-                        $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
-                        
-                        //Loops through all the products and displays the image, name, price and ass to cart button
+                        $products = $searchProducts->fetchAll(PDO::FETCH_ASSOC);
+
+                        echo "<h3> Search results for: $term </h3> <br>";        
+                         //Loops through all the products and displays the image, name, price and ass to cart button
                         for($i=0; $i < count($products); $i++){
                             echo "<div class='productBox'>";
                             $row = $products[$i];
@@ -87,35 +94,21 @@
                             <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
                             echo "</div>";
                         }
-                    
                     }catch(PDOException $e){
                         echo 'ERROR: '.$e -> getMessage();
                     }
-
-                    if(!empty($_GET['productId'])){
-                        //Gets the id stored with each product
-                        $productSelectedId = $_GET["productId"];
-                        
-                        try{
-                            //Connects to database
-                           $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
-                           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                    
-                            
-                            //Using a prepared statement to select the product that matches the id that is attached to the 
-                            $stat = $conn->prepare('SELECT * FROM products WHERE pid = :id');
-                            $stat->bindParam(':id', $productSelectedId);
-                            $stat->execute();
-
-
-                            //Pushes the selected product into the session
-                            array_push($_SESSION['productCartList'],$productSelectedId);                   
-                        }
-                        catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
-                        }
-                }
+                 }else{
+                     echo "Too bad, next time try to type something into the search";
+                 }
 
             ?>
                 
             </div>
         </div>
+
+
+
+ <?php
+
+    
+?>

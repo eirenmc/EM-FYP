@@ -5,6 +5,10 @@ body{
     font-size: 14px;
 }
 
+a{
+    color:white;
+}
+
 /* Navigation CSS */
 #nav2{
     height:50px;
@@ -14,6 +18,13 @@ body{
     background: #558428;
     color:white;
     height:50px;
+}
+
+#searchBtn{
+    background-color: #86D03F;
+    color:white;
+    border:none;
+    font-weight: bold;
 }
 /*
 .flex-container {
@@ -111,7 +122,7 @@ img[alt*="nav"]{
   white-space: nowrap;
   position: relative;
  /* float:right;*/
- margin-left: 64%;
+ margin-left: 58%;
 }
 
 .container-1 input#search{
@@ -158,19 +169,38 @@ img[alt*="nav"]{
 .icon{
     padding:10px 20px;
     background-color:#86D03F;
+    border:none;
+    cursor: pointer;
 }
 
 /* End */
 /* Product CSS */
 .productBox{
     border: solid #558428;
+    float:left;
+    margin-bottom:3%;
+    margin-right:3%;
     /*padding:1%;*/
-    /*width:31%;*/
+    width:275px;
 }
 
 img[alt="product"]{
-    width:250px;
-    height:200px;
+    width:200px;
+    height:150px;
+}
+
+.flex-container-prodPage{
+    width:70%;
+    float:left; 
+    margin-left:2%;
+}
+
+.alignPrice{
+    margin-left:22px;
+}
+
+hr{
+    margin:6% 0%;
 }
 
 /*Star Rating */
@@ -406,4 +436,31 @@ img[alt*="front"]{
 .form-group{
     text-align: right;
     margin-right:25%;
+}
+
+/*Filter*/
+.flex-container-filter{
+    width:20%;
+    float:left;
+    margin-bottom:10%;
+}
+
+.filterCheckbox{
+    width:100%;
+}
+
+.flex-container-filter{
+    margin-left:2%;
+    border: 3px solid #558428;
+    padding:0% 2%;
+    
+}
+
+.titleBar{
+    color: #558428;
+    overflow: auto;
+}
+
+.ratingFilter .priceFilter .sortFilter .originFilter .dietFilter{
+    margin:6% 0%;
 }

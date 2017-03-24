@@ -1,3 +1,7 @@
+<?php
+    //Starts/Resumes sessions
+    session_start();
+?>
 <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">

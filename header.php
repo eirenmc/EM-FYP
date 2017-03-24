@@ -1,15 +1,3 @@
-<!--<nav id="Nav1">
-    <img src="images/logo.png" alt="BuyLocal logo"/>
-    <ul class="flex-container wrap">
-        <li class="flex-menu-item">About</li>
-        <li class="flex-menu-item">Producers</li>
-        <li class="flex-menu-item">Favourites</li>
-        <b><li class="flex-menu-item right">Mary's Account &#9660; </li></b>
-        <li class="flex-menu-item right"><img src="images/login.png" alt="Login/Sign up nav"/></li>
-        <li class="flex-menu-item right"><img src="images/basket.png" alt="basket nav"/></li>
-    </ul>-->
-    <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
-<!--</nav>-->
 <nav id="Nav1">
     <a href="index.php"><img src="images/logo.png" alt="BuyLocal logo"/></a>
     <ul class="flex-container wrap left">
@@ -20,7 +8,7 @@
     <ul class="flex-container wrap right">
         <b><li class="flex-menu-item">Your Account &#9660; </li></b>
         <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
-        <li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li>
+        <a href="basket.php"><li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li></a>
     </ul>
     <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
 </nav>
@@ -29,15 +17,18 @@
 <br>
 <nav id="nav2">
     <ul class="flex-container wrap">
-       <!-- <a href="fruitAndVeg.php">--><li class="flex-menu-item">Fruit & Veg</li><!--</a>-->
-        <li class="flex-menu-item">Meat</li>
-        <li class="flex-menu-item">Dairy & Eggs</li>
-        <li class="flex-menu-item">Bakery</li>
-        <li class="flex-menu-item">Drinks</li>
-        <li class="flex-menu-item">Bundles</li> 
+        <a href="fruitAndVeg.php"><li class="flex-menu-item">Fruit & Veg</li></a>
+        <a href="mpf.php"><li class="flex-menu-item">Meat/Poutry/Fish</li></a>
+        <a href="dairyAndEggs.php"><li class="flex-menu-item">Dairy & Eggs</li></a>
+        <a href="bakery.php"><li class="flex-menu-item">Bakery</li></a>
+        <a href="drinks.php"><li class="flex-menu-item">Drinks</li></a>
+        <a href="bundles.php"><li class="flex-menu-item">Bundles</li></a>
         <div class="container-1">
-            <input type="search" id="search" placeholder="Search..." />
-            <span class="icon"><i class="fa fa-search"></i></span>
+            <form action="searchProducts.php" method="POST">
+                <input type="search" id="search" name="searchTerm" placeholder="Search..." />
+                <!--<span class="icon"><input type="submit" name="search" value="Search" id="searchBtn"/><i class="fa fa-search"></i></span>
+            -->    <button type="submit" value="submit" class="icon"><i class="fa fa-search"></i> Search </button>
+            </form>
         </div>
     </ul>
 </nav>

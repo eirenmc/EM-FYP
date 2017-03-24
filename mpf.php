@@ -1,7 +1,7 @@
-<?php 
+<?php
+    //Starts/Resumes sessions
     session_start();
 ?>
-
 <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -18,7 +18,6 @@
         <?php include "header.php" ?>
         <br>
         <?php include "filter.php" ?>
-
         <div class="flex-container-prodPage">
             <div class="flex-item-product">
                 <?php
@@ -38,7 +37,7 @@
                         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                         //Using a prepared statement to select all the products in the products table
-                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
+                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
 
                         //Execute
                         $insertProducts->execute();
@@ -92,7 +91,7 @@
                         echo 'ERROR: '.$e -> getMessage();
                     }
 
-                    if(!empty($_GET['productId'])){
+                     if(!empty($_GET['productId'])){
                         //Gets the id stored with each product
                         $productSelectedId = $_GET["productId"];
                         

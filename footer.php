@@ -1,5 +1,5 @@
         <footer>
-            <p>Copyright By BuyLocal</p>
+            <p>Copyright By Eiren McLoughlin</p>
         </footer>
     </body>
 </html>

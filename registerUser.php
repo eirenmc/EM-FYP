@@ -1,4 +1,8 @@
 <?php
+    //Starts/Resumes sessions
+    session_start();
+?>
+<?php
     //Variables with the values entered in the input fields of Registration
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
@@ -37,7 +41,7 @@
     function insert_reg($fname, $lname, $uname, $password, $email){
         try{
             //Connecting to the database
-            $conn = new PDO('mysql:host=localhost; dbname=fyp', 'root', '');
+            $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
             $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             //Using a prepared statement to insert the values from the input fields into the database
