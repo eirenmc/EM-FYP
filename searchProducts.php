@@ -25,10 +25,13 @@
 
                     if(!empty($_POST['searchTerm'])){
                         $term = $_POST['searchTerm'];   
+                         $term = strtolower($term);
 
                     try{
-                        $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
+                        $conn = new PDO();
                         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                       
 
                         if($term == 'meat' || $term == 'fish' || $term == 'poultry' || $term == 'chicken'){
                             $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
@@ -40,7 +43,7 @@
                             $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
                         }else if($term == 'dairy' || $term == 'calcium'){
                             $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
-                        }else if($term == 'baked' || $term == 'bake' || $term == 'bakery' || $term == 'Home' || $term == 'made' || $term == 'homemade' || $term == 'sugary'){
+                        }else if($term == 'baked' || $term == 'bake' || $term == 'bakery' || $term == 'Home' || $term == 'made' || $term == 'homemade' || $term == 'sugary' || $term == 'desert' || $term == 'dessert'){
                             $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
                         }else{
                             //Using a prepared statement to select all the products in the products table

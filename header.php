@@ -16,13 +16,39 @@
 <br>
 <br>
 <nav id="nav2">
-    <ul class="flex-container wrap">
+    <div class = "flex-container wrap">
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="FV">
+                <input type='submit' class="flex-menu-item" name='submit1' value='Fruit & Veg'>
+            </form>
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="MPF">
+                <input type='submit' class="flex-menu-item" name='submit2' value='Meat'>
+            </form>
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="BK">
+                <input type='submit' class="flex-menu-item" name='submit3' value='Bakery'>
+            </form>
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="D">
+                <input type='submit' class="flex-menu-item" name='submit4' value='Drinks'>
+            </form>
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="BD">
+                <input type='submit' class="flex-menu-item" name='submit5' value='Bundles'>
+            </form>
+            <form action='products.php' method='GET'>
+                <input type='hidden' name='prodType' value="DE">
+                <input type='submit' class="flex-menu-item" name='submit6' value='Dairy & Eggs'>
+            </form> 
+        </div>
+   <!-- <ul class="flex-container wrap">
         <a href="fruitAndVeg.php"><li class="flex-menu-item">Fruit & Veg</li></a>
         <a href="mpf.php"><li class="flex-menu-item">Meat/Poutry/Fish</li></a>
         <a href="dairyAndEggs.php"><li class="flex-menu-item">Dairy & Eggs</li></a>
         <a href="bakery.php"><li class="flex-menu-item">Bakery</li></a>
         <a href="drinks.php"><li class="flex-menu-item">Drinks</li></a>
-        <a href="bundles.php"><li class="flex-menu-item">Bundles</li></a>
+        <a href="bundles.php"><li class="flex-menu-item">Bundles</li></a>-->
         <div class="container-1">
             <form action="searchProducts.php" method="POST">
                 <input type="search" id="search" name="searchTerm" placeholder="Search..." />

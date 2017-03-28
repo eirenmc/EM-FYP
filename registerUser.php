@@ -41,7 +41,7 @@
     function insert_reg($fname, $lname, $uname, $password, $email){
         try{
             //Connecting to the database
-            $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
+            $conn = new PDO();
             $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             //Using a prepared statement to insert the values from the input fields into the database

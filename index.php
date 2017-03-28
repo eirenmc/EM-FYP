@@ -1,3 +1,6 @@
+<?php 
+   session_start();
+?>
 <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -37,7 +40,7 @@
                 <?php
                     try{   
                 //Connecting to the database
-                $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
+                $conn = new PDO();
                 $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 //Using a prepared statement to select all the products in the products table
