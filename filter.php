@@ -97,12 +97,7 @@
 </div>
 
 <?php
-                /*    try{   
-                        //Connecting to the database
-                        $conn = new PDO('mysql:host=localhost; dbname=fyp', 'root', '');
-                        $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $insertProducts;
-                        
+                /*    try{                           
                         if($_GET["sortPriceLH"]){
                             //Using a prepared statement to select all the products in the products table
                             $insertProducts = $conn->prepare("SELECT * FROM products ORDER BY pPrice ASC");

@@ -1,11 +1,11 @@
 <?php
     //Starts/Resumes sessions
-   // session_start();
-?>
-
-<?php    
+    session_start();
+    include_once "dbCon.php";
+   // var_dump($conn);
+    
     //Variables with the values entered in the input fields of Login
-    $email = $_POST["uname"];
+    $uname = $_POST["uname"];
     $password = $_POST["password"];
 
     //Checks thats the input fields are not empty
@@ -14,15 +14,18 @@
         //Cleans the values entered in the inputs
         $uname = clean_input($_POST['uname']);
         $password = clean_input($_POST['password']);
-
+        
         //Creating a usersname session
-      //  $_session["uname"] = $uname;
-
-        //function call to check login details to see do they match up with the users table in the database
-        check_login($uname, $password);        
+        $_session["uname"] = $uname;
+       /* echo "Im checking that your not empty";
+        var_dump($conn);*/
+       //function call to check login details to see do they match up with the users table in the database
+        check_login($uname, $password);
+        // var_dump($conn);       
     }else{
         $uname = NULL;
         $password = NULL;
+       // echo "Im making you null";
     }
 
     //Function that cleans data and strips out tags and code so inputs can't be code
@@ -38,38 +41,38 @@
 
     // Checks login details to make sure they match with an entry in the database
     function check_login($uname, $password){
+        global $conn;
+       /* echo "checking login before accessing DB";
+        var_dump($conn);*/
         try{
-            //Connecting to the database
-            $conn = new PDO();
-            $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+           /* echo "trying";
+            var_dump($conn);*/
             //Using a prepared statement to select the email and passwords in the databases so they can be cross-referenced
-            $checkUNameData = $conn->prepare("SELECT email FROM customers");
+            $checkUnameData = $conn->prepare("SELECT * FROM customers");
             $checkPasswordData = $conn->prepare("SELECT uPassword FROM customers");
-
+           
+           // echo "Trying to prepare DB";
             //Executes  
-            $checkUNameData->execute();
+            $checkUnameData->execute();
             $checkPasswordData->execute();
 
             //Makes the password a sha1 type password
             $password = sha1($password);
-            $userLoggedIn;
-
-            //Loops through the database and gets the username and password and checks it against the database
-            while(($userDB = $checkUNameData->fetch(PDO::FETCH_ASSOC)) && ($passwordDB = $checkPasswordData->fetch(PDO::FETCH_ASSOC))){               
-                //If the email and password match up with the database, the page redirects to the products page
-                if($uname == $userDB['uName']  && $password == $passwordDB['uPassword']){
-                   $userLoggedIn = true;
-                }else{
-                    echo "Hello";
+            
+            //Loops through the database and gets the email and password and checks it against the database
+            while(($userDB = $checkUnameData->fetch(PDO::FETCH_ASSOC)) && ($passwordDB = $checkPasswordData->fetch(PDO::FETCH_ASSOC))){
+               /* echo "Whiling ";
+                var_dump($uname);
+                var_dump($password);*/
+                
+                //If the username and password match up with the database, the page redirects to the products page
+                if(($uname == $userDB['uName']) && ($password == $passwordDB['uPassword'])){
+                   // echo "Confirming login";
+                   header("Location: products.php");
                 }
             }
-
-            if($userLoggedIn == true){
-                header('Location: fruitAndVeg.php'); 
-            }
         }catch(PDOException $e){
-           // echo 'ERROR: '.$e -> getMessage();
+            echo 'ERROR: '.$e -> getMessage();
         } 
     }
 ?>

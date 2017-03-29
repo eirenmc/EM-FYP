@@ -67,7 +67,7 @@
                 <br>
                 <center><h2>Login to your Buy Local Account</h2>
                 <img src="images/logo.png" alt="logo" width="150px"/><br><br>
-                <label>Username :</label>
+                <label>Email :</label>
                 <input type="text" placeholder="Enter Username" name="uname" class="field" required>
                 <br><br>
                 <label>Password :</label>

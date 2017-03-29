@@ -1,5 +1,6 @@
 <?php 
    session_start();
+   include_once "dbCon.php";
 ?>
 <!DOCTYPE html>
     <head>
@@ -39,10 +40,6 @@
                 <div class="productBox">
                 <?php
                     try{   
-                //Connecting to the database
-                $conn = new PDO();
-                $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 //Using a prepared statement to select all the products in the products table
                 $insertProducts = $conn->prepare("SELECT * FROM products WHERE pName = 'Vegetable Bundle - Large'");
 
@@ -98,10 +95,6 @@
                 $productSelectedId = $_GET["productId"];
                 
                 try{
-                    //Connects to database
-                    $conn = new PDO('mysql:host=localhost; dbname=fyp', 'root', '');
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                    
-                    
                     //Using a prepared statement to select the product that matches the id that is attached to the 
                     $stat = $conn->prepare('SELECT * FROM products WHERE pid = :id');
                     $stat->bindParam(':id', $productSelectedId);

@@ -1,6 +1,7 @@
 <?php
     //Starts/Resumes sessions
     session_start();
+    include_once "dbCon.php";
 ?>
 <!DOCTYPE html>
     <head>

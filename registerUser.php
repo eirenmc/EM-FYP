@@ -1,6 +1,7 @@
 <?php
     //Starts/Resumes sessions
     session_start();
+    include_once "dbCon.php";
 ?>
 <?php
     //Variables with the values entered in the input fields of Registration
@@ -40,10 +41,6 @@
     // Inserting registration details in the database
     function insert_reg($fname, $lname, $uname, $password, $email){
         try{
-            //Connecting to the database
-            $conn = new PDO();
-            $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             //Using a prepared statement to insert the values from the input fields into the database
             $stmt = $conn -> prepare('INSERT INTO customers VALUES (:uId, :fName, :lName, :uName, sha1(:uPassword), :uEmail)');
             

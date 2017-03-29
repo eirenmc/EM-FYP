@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include_once "dbCon.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +26,7 @@
 
                 $productCartArr = $_SESSION["productCartList"];
 
-                try{
-
-                    //Connecting to database
-                    $conn = new PDO();
-                    $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        
+                try{    
                     var_dump($productCartArr);
 
                     //Loops through the product array session

@@ -1,5 +1,6 @@
 <?php 
    session_start();
+   include_once "dbCon.php";
 ?>
 
 <!DOCTYPE html>
@@ -34,23 +35,20 @@
                     }
 
                     $prodDisplayType = $_GET["prodType"];
+                    $productDisplayed = $_GET['productDisplayed'];
 
                     try{   
-                        //Connecting to the database
-                        $conn = new PDO('');
-                        $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                        if($prodDisplayType == 'FV'){
+                        if($prodDisplayType == 'FV' || $productDisplayed == 'FV'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
-                        }else if($prodDisplayType == 'MPF'){
+                        }else if($prodDisplayType == 'MPF' || $productDisplayed == 'MPF'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
-                        }else if($prodDisplayType == 'BK'){
+                        }else if($prodDisplayType == 'BK' || $productDisplayed == 'BK'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
-                        }else if($prodDisplayType == 'D'){
+                        }else if($prodDisplayType == 'D' || $productDisplayed == 'D'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D'");
-                        }else if($prodDisplayType == 'BD'){
+                        }else if($prodDisplayType == 'BD' || $productDisplayed == 'BD'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
-                        }else if($prodDisplayType == 'DE'){
+                        }else if($prodDisplayType == 'DE' || $productDisplayed == 'DE'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
                         }else{
                             $insertProducts = $conn->prepare("SELECT * FROM products");
@@ -99,9 +97,13 @@
                                 echo "<span class='scoredRating'>☆</span>";
                                 echo "</span>";
                             }
-                            echo "<input class='btn ".$row['pId']."' type='submit' value='View Details'>";
-                            echo "<form action='fruitAndVeg.php' method='GET'>
-                            <input type='hidden'  name='productId' value='".$row['pId']."'>
+                            echo "<form action='productDetail.php' method='GET'>
+                            <input type='hidden'  name='productViewId' value='".$row['pId']."'>
+                            <input class='btn2 ".$row['pId']."' type='submit' value='View Product'></form>";
+                            
+                            echo "<form action='products.php' method='GET'>
+                            <input type='hidden'  name='productBasketId' value='".$row['pId']."'>
+                            <input type='hidden'  name='productDisplayed' value='".$row['pType']."'>
                             <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
                             echo "</div>";
                         }
@@ -110,15 +112,11 @@
                         echo 'ERROR: '.$e -> getMessage();
                     }
 
-                    if(!empty($_GET['productId'])){
+                    if(!empty($_GET['productBasketId'])){
                         //Gets the id stored with each product
-                        $productSelectedId = $_GET["productId"];
+                        $productSelectedId = $_GET["productBasketId"];
                         
-                        try{
-                            //Connects to database
-                           $conn = new PDO('mysql:host=localhost; dbname=ttbgqu_embl', 'ttbgqu_emweb', 'T9&O+m1uVD98');
-                           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);                    
-                            
+                        try{  
                             //Using a prepared statement to select the product that matches the id that is attached to the 
                             $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
                             $stat->bindParam(':pId', $productSelectedId);
