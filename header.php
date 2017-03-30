@@ -19,18 +19,19 @@
 
 <nav id="Nav1">
     <a href="index.php"><img src="images/logo.png" alt="BuyLocal logo"/></a>
+    
     <ul class="flex-container wrap left">
-       <b> <li class="flex-menu-item">About</li>
-        <li class="flex-menu-item">Producers</li>
+       <a href="about.php"><li class="flex-menu-item-top">About</li></a>
+        <li class="flex-menu-item-top">Producers</li>
         <?php 
              if(!empty($_SESSION['uname'])){
-                echo "<li class='flex-menu-item'>Favourites</li>";
+                echo "<li class='flex-menu-item-top'>Favourites</li>";
             }
         ?>
-        </b>
     </ul>
+
     <ul class="flex-container wrap right">
-        <b><li class="flex-menu-item">
+        <b><li class="flex-menu-item-top">
         <?php 
              if(!empty($_SESSION['uname'])){
                 $username = $_SESSION['uname']; 
@@ -39,14 +40,17 @@
                 echo "Your";
             }
         ?> Account &#9660; </li></b>
-        <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
-        <a href="basket.php"><li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li></a>
+        <li class="flex-menu-item-top"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
+        <a href="basket.php"><li class="flex-menu-item-top"><img src="images/basket.png" alt="basket nav"/></li></a>
     </ul>
+
     <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
 </nav>
+
 <br>
 <br>
 <br>
+
 <nav id="nav2">
     <div class = "flex-container wrap">
             <form action='products.php' method='GET'>
@@ -74,13 +78,7 @@
                 <input type='submit' class="flex-menu-item" name='submit6' value='Dairy & Eggs'>
             </form> 
         </div>
-   <!-- <ul class="flex-container wrap">
-        <a href="fruitAndVeg.php"><li class="flex-menu-item">Fruit & Veg</li></a>
-        <a href="mpf.php"><li class="flex-menu-item">Meat/Poutry/Fish</li></a>
-        <a href="dairyAndEggs.php"><li class="flex-menu-item">Dairy & Eggs</li></a>
-        <a href="bakery.php"><li class="flex-menu-item">Bakery</li></a>
-        <a href="drinks.php"><li class="flex-menu-item">Drinks</li></a>
-        <a href="bundles.php"><li class="flex-menu-item">Bundles</li></a>-->
+
         <div class="container-1">
             <form action="searchProducts.php" method="POST">
                 <input type="search" id="search" name="searchTerm" placeholder="Search..." />
@@ -88,7 +86,7 @@
             -->    <button type="submit" value="submit" class="icon"><i class="fa fa-search"></i> Search </button>
             </form>
         </div>
-    </ul>
+    </div>
 </nav>
 
 <div id="id01" class="modal">

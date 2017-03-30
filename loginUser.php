@@ -77,7 +77,7 @@
                 //If the username and password match up with the database, the page redirects to the products page
                 if(($uname == $userDB['uName']) && ($password == $passwordDB['uPassword'])){
                    // echo "Confirming login";
-                   header("Location: products.php");
+                   header("Location: index.php");
                 }
             }
         }catch(PDOException $e){

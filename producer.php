@@ -24,44 +24,16 @@
             <div class="flex-item-product">
                 <?php
 
-                    global $productCartList;
-                    global $uId;
-
-                    if(isset($_SESSION["productCartList"])){
-                        $productCartArr = $_SESSION["productCartList"];
-                    }else{
-                        $_SESSION['productCartList'] = array();
-                        $productCartArr = $_SESSION["productCartList"];
-                    }
-
                     if(isset($_SESSION["userId"])){
                         $uId = $_SESSION["userId"];
                     }
 
-                    $prodDisplayType = $_GET["prodType"];
-                    $productDisplayed = $_GET['productDisplayed'];
 
                     try{   
-                        if($prodDisplayType == 'FV' || $productDisplayed == 'FV'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
-                        }else if($prodDisplayType == 'MPF' || $productDisplayed == 'MPF'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
-                        }else if($prodDisplayType == 'BK' || $productDisplayed == 'BK'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
-                        }else if($prodDisplayType == 'D' || $productDisplayed == 'D'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D'");
-                        }else if($prodDisplayType == 'BD' || $productDisplayed == 'BD'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
-                        }else if($prodDisplayType == 'DE' || $productDisplayed == 'DE'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
-                        }else{
-                            $insertProducts = $conn->prepare("SELECT * FROM products");
-                        }
-                        //Using a prepared statement to select all the products in the products table
-                        //$insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
+                        $insertProducers = $conn->prepare("SELECT * FROM producers");
 
                         //Execute
-                        $insertProducts->execute();
+                        $insertProducers->execute();
 
                         //fetches all the products from the database
                         $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);

@@ -11,20 +11,72 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+
         <?php include "header.php" ?>
-            <img src="about.jpg" alt="about image"/>
-            <div class="flex-container-frontPage">
+        
+        <div class="flex-container-aboutPage">
             <div class="flex-item-frontPage">
-                <center><h1>Buy Local</h1></center>
+            <img src="images/aboutImg.jpg" alt="front" id="imgForText"/>
+           <!-- <div class="flex-item-frontPage">-->
+                <h1 id="textAlignImg">Buy Local</h1>
             </div>
         </div>
-        <div class="flex-container-frontPage">
+        
+        <br>
+        <br>
+
+        <div class="flex-container-frontPage beginning">
+            <div class="flex-item-frontPage">
+                <p>Buy Local is an Irish Local Producer source for locally produced food. Our hope is to encourage the purchasing of locally produced products in supporting locally, healthy food choices and knowing what you buy and where you buy are important.</p>
+                <p>We provide you the opportunity not only to purchase locally produced food but to know who your getting it from so that you know it is high quality and food is the way you want it </p>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+         <?php include "deliveryInfo.php" ?>
+
+        <br>
+
+         <div class="flex-container-frontPage aboutContainer">
+            <div class="flex-item-frontPage">
+                <h1>Local Producers</h1>
+                <p>If you are a local producer and are interested in collobrating with Buy Local, please get in contact with us. For local producers we offer a space where you can sell your products online and be recognised as a local producer, you get control over what products you want to sell online and how much to sell them for</p>                <p>We provide you the opportunity not only to purchase locally produced food but to know who your getting it from so that you know it is high quality and food is the way you want it </p>
+            </div>
+        </div>
+
+         <div class="flex-container-frontPage">
             <div class="flex-item-frontPage">
                 <p>Buy Local is a project being developed by 4th Year Creative Multimedia student Eiren McLoughlin studying in Limerick Institute of Technology Clonmel </p>
-                <p> </p>
+                
             </div>
         </div>
         <br>
+        <div class="contact">
+            <center><h2> Contact Buy Local ! </h2></center>
+            <br>
+            <form action="sendMessage.php" method="POST">
+                <div class="form-group2">
+                    <b>Full Name : </b>
+                    <input type="text"class="field" name="name" id="name" maxlength="30" placeholder="Full Name" required>
+                </div>
+                <br>
+                <div class="form-group2">
+                    <b>Email Address : </b>
+                    <input type="text" name="emailSender" class="field" id="emailSender" maxlength="30" placeholder="Email Address" required>
+                </div>
+                <br>
+                <div class="form-group2">
+                    <b>Message : </b>
+                    <textarea type="text" name="messageSender" class="field" id="messageSender" maxlength="500" rows="6" cols="50" required> </textarea>
+                </div>
+                <br>
+                <br>
+                <center><button name="submit" class='button'> Submit </button></center>
+            </form>
+        </div>
+        
         <?php include "footer.php" ?>
     </body>
 </html>

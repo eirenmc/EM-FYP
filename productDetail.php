@@ -22,6 +22,7 @@
                 <?php
 
                     global $productCartList;
+                    global $storePId;
 
                     if(isset($_SESSION["productCartList"])){
                         $productCartArr = $_SESSION["productCartList"];
@@ -35,8 +36,11 @@
                     $productViewId = $_GET["productViewId"];
                     $productSelectedId = $_GET["productSelected"];
 
+                    echo "<br>Store p id is:";
+                    print_r($storePId);
+                          
                     try{   
-                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pId = $productViewId");
+                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pId = '$productViewId' OR pId = '$storePId'");
                        
                         //Execute
                         $insertProducts->execute();
@@ -86,6 +90,10 @@
                             echo "</form>";
                            // echo "<input class='btn2' type='submit' value='Add To Cart'></form>";
                             echo "</div>";
+                            
+                            echo "<br> Store p id take 2 is:";
+                            print_r($storePId);
+                            $storePId = $row['pId'];
                         }
                     
                     }catch(PDOException $e){
@@ -93,20 +101,24 @@
                     }
 
                     if(!empty($_GET['productSelected'])){
-                        try{  
+                        try{
+
                             //Using a prepared statement to select the product that matches the id that is attached to the 
                             $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
                             $stat->bindParam(':pId', $productSelectedId);
                             $stat->execute();
 
-                            echo "Hello World";
+                           // echo "Hello World";
                             //Pushes the selected product into the session
                             array_push($_SESSION['productCartList'],$productSelectedId);
-                            print_r($_SESSION['productCartList']);           
+                           // print_r($_SESSION['productCartList']);           
                         }
                         catch(PDOException $e){
                             echo 'ERROR: ' . $e->getMessage();
-                        }     
+                        }  
+
+                        echo "<br>Store p id take 3 is:";
+                        print_r($storePId);   
                     }
                 // print_r($_SESSION['productCartList']); 
             ?>

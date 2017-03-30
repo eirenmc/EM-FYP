@@ -84,6 +84,20 @@ ul{
     margin-left:4%;
     margin-top:14px;
     float:left;
+    cursor: pointer;
+    background-color: #558428;
+    color:white;
+    border: none;
+    font-size: 12pt;
+}
+
+.flex-menu-item-top{
+    margin-left:4%;
+    margin-top:14px;
+    float:left;
+    cursor: pointer;
+    background-color: white;
+    color: black;
 }
 
 .menu-item-right{
@@ -110,6 +124,7 @@ img[alt*="icon"]{
 
 img[alt*="nav"]{
     height:35px;
+    cursor: pointer;
 }
 
 #search{
@@ -434,6 +449,12 @@ img[alt*="front"]{
     margin-right:25%;
 }
 
+.form-group2{
+    text-align: right;
+    margin-right: 40%;
+
+}
+
 /*Filter*/
 .flex-container-filter{
     width:20%;
@@ -460,3 +481,91 @@ img[alt*="front"]{
 .ratingFilter .priceFilter .sortFilter .originFilter .dietFilter{
     margin:6% 0%;
 }
+
+/* About Page */
+.flex-container-aboutPage{
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+#imgForText{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#textAlignImg {
+    z-index: 100;
+    position: absolute;
+    color: white;
+    font-size: 70pt;
+    font-weight: bold;
+    left: 30%;
+    top: 225px;
+}
+
+.contact{
+    padding:2% 0%;
+    background-color:#91D054;
+    width:100%;
+    margin:auto;
+}
+
+/*Index */
+.flex-item-productPop{
+    width:100%;
+    margin-left:8%;
+}
+
+.productBoxPop{
+    border: solid #558428;
+    float:left;
+    margin-bottom:3%;
+    margin-right:3%;
+    width:250px;
+}
+
+.flex-item-frontPageHalf{
+    width:50%;
+    float:left;
+}
+
+img[alt="delivery"]{
+    width:50px;
+    float:left;
+    margin-top:3px;
+    margin-left:15%;
+    margin-right:4%;
+}
+
+.delivery{
+    list-style: none;
+    padding:4%;
+}
+
+.flex-container-frontPage  .flex-item-frontPageHalf:first-of-type{
+    margin-left:15%;
+}
+
+.flex-item-frontPageHalf > p, h2{
+    width:80%;
+    margin:auto;
+}
+
+.beginning{
+    margin-top: 32%;
+}
+
+/*
+.flex-container-frontPage{
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+}
+
+.flex-item-frontPage{
+    width: 60%;
+    margin: auto;
+}*/
