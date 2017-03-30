@@ -40,54 +40,54 @@
                 <div class="productBox">
                 <?php
                     try{   
-                //Using a prepared statement to select all the products in the products table
-                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pName = 'Vegetable Bundle - Large'");
+                        //Using a prepared statement to select all the products in the products table
+                        $insertProducts = $conn->prepare("SELECT * FROM products WHERE pName = 'Vegetable Bundle - Large'");
 
-                //Execute
-                $insertProducts->execute();
+                        //Execute
+                        $insertProducts->execute();
 
-                //fetches all the products from the database
-                $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
-                
-                //Loops through all the products and displays the image, name, price and ass to cart button
-                for($i=0; $i < count($products); $i++){
-                    $row = $products[$i];
-                    echo "<center><b>".$row['pName']."</b><br><br>";
-                    echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/></br>";
-                    echo "<b> Price: </b> €".$row['pPrice']." <b class='rate'> Rating: </b>";
+                        //fetches all the products from the database
+                        $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        //Loops through all the products and displays the image, name, price and ass to cart button
+                        for($i=0; $i < count($products); $i++){
+                            $row = $products[$i];
+                            echo "<center><b>".$row['pName']."</b><br><br>";
+                            echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/></br>";
+                            echo "<b> Price: </b> €".$row['pPrice']." <b class='rate'> Rating: </b>";
+                            
+                            //Checks the rating and creates the stars deending on its rating
+                            if($row['pRating'] == 5){
+                                echo "<span class='rating five'>";
+                                echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>";
+                                echo "</span>";
+                            }else if($row['pRating'] == 4){
+                                echo "<span class='rating five'>";
+                                echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span>";
+                                echo "</span>";
+                            }else if($row['pRating'] == 3){
+                                echo "<span class='rating five'>";
+                                echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span>";
+                                echo "</span>";
+                            }else if($row['pRating'] == 2){
+                                echo "<span class='rating five'>";
+                                echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span>";
+                                echo "</span>";
+                            }else if($row['pRating'] == 1){
+                                echo "<span class='rating five'>";
+                                echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
+                                echo "</span>";
+                            }
+                            echo "<input class='btn ".$row['pId']."' type='submit' value='View Details'>";
+                            echo "<form action='products.php' method='GET'>
+                            <input type='hidden'  name='productId' value='".$row['pId']."'>
+                            <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
+                            echo "</center></div></div>";
+                        }
                     
-                    //Checks the rating and creates the stars deending on its rating
-                    if($row['pRating'] == 5){
-                        echo "<span class='rating five'>";
-                        echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>";
-                        echo "</span>";
-                    }else if($row['pRating'] == 4){
-                        echo "<span class='rating five'>";
-                        echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span>";
-                        echo "</span>";
-                    }else if($row['pRating'] == 3){
-                        echo "<span class='rating five'>";
-                        echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span>";
-                        echo "</span>";
-                    }else if($row['pRating'] == 2){
-                        echo "<span class='rating five'>";
-                        echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span>";
-                        echo "</span>";
-                    }else if($row['pRating'] == 1){
-                        echo "<span class='rating five'>";
-                        echo "<span class='scoredRating'>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>";
-                        echo "</span>";
+                    }catch(PDOException $e){
+                        echo 'ERROR: '.$e -> getMessage();
                     }
-                    echo "<input class='btn ".$row['pId']."' type='submit' value='View Details'>";
-                    echo "<form action='products.php' method='GET'>
-                    <input type='hidden'  name='productId' value='".$row['pId']."'>
-                    <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
-                    echo "</center></div></div>";
-                }
-            
-            }catch(PDOException $e){
-                echo 'ERROR: '.$e -> getMessage();
-            }
         /*
             if(!empty($_GET['productId'])){
 

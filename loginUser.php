@@ -1,12 +1,22 @@
 <?php
+    global $userLoggedIn;
+
     //Starts/Resumes sessions
     session_start();
+    
     include_once "dbCon.php";
    // var_dump($conn);
     
     //Variables with the values entered in the input fields of Login
     $uname = $_POST["uname"];
     $password = $_POST["password"];
+
+    //Creating a usersname session
+    if(isset($_SESSION["uname"])){
+        $_SESSION["uname"] = $uname;
+    }else{
+        $_SESSION["uname"] = $uname;
+    }
 
     //Checks thats the input fields are not empty
     if((!empty($_POST['uname'])) && (!empty($_POST['password']))){
@@ -15,8 +25,7 @@
         $uname = clean_input($_POST['uname']);
         $password = clean_input($_POST['password']);
         
-        //Creating a usersname session
-        $_session["uname"] = $uname;
+       
        /* echo "Im checking that your not empty";
         var_dump($conn);*/
        //function call to check login details to see do they match up with the users table in the database

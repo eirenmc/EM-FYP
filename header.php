@@ -1,12 +1,44 @@
+<?php
+    session_start();
+    
+    if(!empty($_SESSION['uname'])){
+        $username = $_SESSION['uname'];
+        $getUserId = $conn->prepare("SELECT uId FROM customers WHERE uName ='$username'");
+        $getUserId->execute();
+        $userStored = $getUserId->fetch(PDO::FETCH_ASSOC);
+                        
+        print_r($userStored['uId']);
+        
+        if(isset($_SESSION["userId"])){
+            $_SESSION["userId"] = $userStored['uId'];
+        }else{
+            $_SESSION["userId"] = $userStored['uId'];
+        }   
+    }    
+?>
+
 <nav id="Nav1">
     <a href="index.php"><img src="images/logo.png" alt="BuyLocal logo"/></a>
     <ul class="flex-container wrap left">
        <b> <li class="flex-menu-item">About</li>
         <li class="flex-menu-item">Producers</li>
-        <li class="flex-menu-item">Favourites</li></b>
+        <?php 
+             if(!empty($_SESSION['uname'])){
+                echo "<li class='flex-menu-item'>Favourites</li>";
+            }
+        ?>
+        </b>
     </ul>
     <ul class="flex-container wrap right">
-        <b><li class="flex-menu-item">Your Account &#9660; </li></b>
+        <b><li class="flex-menu-item">
+        <?php 
+             if(!empty($_SESSION['uname'])){
+                $username = $_SESSION['uname']; 
+                print_r($username);
+            }else{
+                echo "Your";
+            }
+        ?> Account &#9660; </li></b>
         <li class="flex-menu-item"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
         <a href="basket.php"><li class="flex-menu-item"><img src="images/basket.png" alt="basket nav"/></li></a>
     </ul>

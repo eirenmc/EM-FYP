@@ -82,7 +82,7 @@
                             
                             echo "<form action='productDetail.php' method='GET'>";
                             echo "<input type='hidden' name='productSelected' value='".$row['pId']."'>";
-                            echo "<input type='submit' value='Fruit & Veg'>";
+                            echo "<input type='submit' class='btn2' value='Add to basket'>";
                             echo "</form>";
                            // echo "<input class='btn2' type='submit' value='Add To Cart'></form>";
                             echo "</div>";

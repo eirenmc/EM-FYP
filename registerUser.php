@@ -1,15 +1,23 @@
 <?php
+    global $userLoggedIn;
+
     //Starts/Resumes sessions
     session_start();
     include_once "dbCon.php";
-?>
-<?php
+
     //Variables with the values entered in the input fields of Registration
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
     $uname = $_POST["uname"];
     $password = $_POST["password"];
     $email = $_POST["email"];
+
+    //Creating a usersname session
+    if(isset($_SESSION["uname"])){
+        $_SESSION["uname"] = $uname;
+    }else{
+        $_SESSION["uname"] = $uname;
+    }
 
      //Checks thats the input fields are not empty
     if((!empty($_POST['uname'])) && (!empty($_POST['password'])) && (!empty($_POST['email'])) && (!empty($_POST['fname']))  && (!empty($_POST['lname']))){
@@ -40,6 +48,7 @@
 
     // Inserting registration details in the database
     function insert_reg($fname, $lname, $uname, $password, $email){
+        global $conn;
         try{
             //Using a prepared statement to insert the values from the input fields into the database
             $stmt = $conn -> prepare('INSERT INTO customers VALUES (:uId, :fName, :lName, :uName, sha1(:uPassword), :uEmail)');

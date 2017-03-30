@@ -25,13 +25,17 @@
                 <?php
 
                     global $productCartList;
+                    global $uId;
 
                     if(isset($_SESSION["productCartList"])){
                         $productCartArr = $_SESSION["productCartList"];
-                    }
-                    else{
+                    }else{
                         $_SESSION['productCartList'] = array();
                         $productCartArr = $_SESSION["productCartList"];
+                    }
+
+                    if(isset($_SESSION["userId"])){
+                        $uId = $_SESSION["userId"];
                     }
 
                     $prodDisplayType = $_GET["prodType"];
@@ -99,19 +103,120 @@
                             }
                             echo "<form action='productDetail.php' method='GET'>
                             <input type='hidden'  name='productViewId' value='".$row['pId']."'>
-                            <input class='btn2 ".$row['pId']."' type='submit' value='View Product'></form>";
+                            <input class='btn ".$row['pId']."' type='submit' value='View Product'></form>";
                             
+                            echo "<form action='products.php' method='GET'>";
+                            echo "<input type='hidden'  name='productDisplayed' value='".$row['pType']."'>";
+                           
+                            $currentPId = $row['pId'];
+
+                            if(isset($_SESSION["userId"])){
+                                global $conn;
+                                $checkFavStatus;
+                                $itAFav;
+
+                                echo "uId value:";
+                                var_dump($uId);
+                                echo "CurrentId value:";
+                                var_dump($currentPId);
+                               
+                               try{
+                                    $checkFavStatus = $conn->prepare("SELECT fId FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");
+                                    $checkFavStatus->execute();
+
+                                    /*
+                                    if($checkFavStatus == null){
+                                        $itAFav = 0;
+                                    }else*/ /*if(empty($checkFavStatus)){
+                                        $itAFav = 0;
+                                    }else if(!empty($checkFavStatus)){
+                                        $itAFav = 1;
+                                    }*/
+                                    
+                                    $favStatus = $checkFavStatus->fetch(PDO::FETCH_ASSOC);
+
+                                    if(!empty($favStatus['fId'])){
+                                        $itAFav = 1;
+                                    }else{
+                                        $itAFav = 0;
+                                    }
+                                    
+
+                               }catch(PDOException $e){
+                                    echo 'ERROR: ' . $e->getMessage();
+                                }
+                               
+                               if($itAFav == 0){
+                                    echo "<button>&#x2606;</button>";
+                                    echo "<input type='hidden'  name='productFavId' value='".$row['pId']."'>";
+                               }
+                               if($itAFav == 1){
+                                    echo "<button>&#x2605;</button>";
+                                    echo "<input type='hidden'  name='productSelectFavId' value='".$row['pId']."'>";
+                               }
+                            }else{
+                                echo "<button>&#x2606;</button>";
+                            }
+                            
+                            echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
+
+                            //Add an if statement to decide which fav button to show
                             echo "<form action='products.php' method='GET'>
                             <input type='hidden'  name='productBasketId' value='".$row['pId']."'>
                             <input type='hidden'  name='productDisplayed' value='".$row['pType']."'>
                             <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
                             echo "</div>";
                         }
-                    
                     }catch(PDOException $e){
                         echo 'ERROR: '.$e -> getMessage();
                     }
 
+                    if(!empty($_GET['productFavId'])){
+                        global $conn;
+                       // print_r($userLoggedInId);
+                        $prodId = $_GET["productFavId"];
+                         print_r($uId);
+                        try{
+                            $stmt = $conn -> prepare('INSERT INTO favourites VALUES (:fId, :uId, :pId)');
+                            
+                            $stmt->bindParam(':fId', $fId);
+                            $stmt->bindParam(':uId', $uId);
+                            $stmt->bindParam(':pId', $pId);
+
+                            $fId = null;
+                            print_r($uId);
+                            $uId = $uId;
+                            $pId = $prodId;
+                        
+                            $stmt->execute();
+                         }catch(PDOException $e){
+                            echo 'ERROR: ' . $e->getMessage();
+                        }
+                    }
+
+                    if(!empty($_GET['productSelectFavId'])){
+                        global $conn;
+                       // print_r($userLoggedInId);
+                        $prodSelectId = $_GET["productSelectFavId"];
+                        
+                        try{
+                            $stmt = $conn -> prepare('DELETE * FROM favourites WHERE pId = :pId');
+                            
+                            $stmt->bindParam(':fId', $fId);
+                            $stmt->bindParam(':uId', $uId);
+                            $stmt->bindParam(':pId', $pId);
+
+                            $fId = null;
+                            print_r($uId);
+                            $uId = $uId;
+                            $pId = $prodId;
+                        
+                            $stmt->execute();
+                         }catch(PDOException $e){
+                            echo 'ERROR: ' . $e->getMessage();
+                        }
+                    }
+               
                     if(!empty($_GET['productBasketId'])){
                         //Gets the id stored with each product
                         $productSelectedId = $_GET["productBasketId"];
@@ -130,9 +235,8 @@
                         catch(PDOException $e){
                             echo 'ERROR: ' . $e->getMessage();
                         }
-                }
-                // print_r($_SESSION['productCartList']); 
-            ?>
+                    }
+                ?>
                 
             </div>
         </div>
