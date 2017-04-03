@@ -88,7 +88,7 @@ ul{
     background-color: #558428;
     color:white;
     border: none;
-    font-size: 12pt;
+    font-size: 11pt;
 }
 
 .flex-menu-item-top{
@@ -189,6 +189,14 @@ img[alt*="nav"]{
 }
 
 /* End */
+.producerBox{
+    border: solid #558428;
+    float:left;
+    margin-bottom:3%;
+    margin-right:3%;
+}
+
+
 /* Product CSS */
 .productBox{
     border: solid #558428;
@@ -202,6 +210,20 @@ img[alt*="nav"]{
 img[alt="product"]{
     width:200px;
     height:150px;
+}
+
+img[alt="producer"]{
+    width:250px;
+    height:200px;
+}
+
+.flex-item-producer{
+    margin:auto;
+}
+
+.flex-container-producer{
+    width:100%;
+    margin-left:7%;
 }
 
 .flex-container-prodPage{
@@ -569,3 +591,20 @@ img[alt="delivery"]{
     width: 60%;
     margin: auto;
 }*/
+
+#circle {
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border: #91D054 2px solid ;
+      border-radius: 20px;
+      background:white;
+      position: relative;
+      left: -25px;
+      top: 15px;
+}
+
+#basketNo{
+    margin-left:5px;
+}

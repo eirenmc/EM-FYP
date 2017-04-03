@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+   
     if(!empty($_SESSION['uname'])){
         $username = $_SESSION['uname'];
         $getUserId = $conn->prepare("SELECT uId FROM customers WHERE uName ='$username'");
@@ -14,15 +14,15 @@
         }else{
             $_SESSION["userId"] = $userStored['uId'];
         }   
-    }    
+    }   
 ?>
 
 <nav id="Nav1">
     <a href="index.php"><img src="images/logo.png" alt="BuyLocal logo"/></a>
     
     <ul class="flex-container wrap left">
-       <a href="about.php"><li class="flex-menu-item-top">About</li></a>
-        <li class="flex-menu-item-top">Producers</li>
+        <a href="about.php"><li class="flex-menu-item-top">About</li></a>
+        <a href="producer.php"><li class="flex-menu-item-top">Producers</li></a>
         <?php 
              if(!empty($_SESSION['uname'])){
                 echo "<li class='flex-menu-item-top'>Favourites</li>";
@@ -31,7 +31,25 @@
     </ul>
 
     <ul class="flex-container wrap right">
-        <b><li class="flex-menu-item-top">
+        <li class="flex-menu-item-top"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
+        <a href="basket.php"><li class="flex-menu-item-top"><img src="images/basket.png" alt="basket nav"/></div></li></a>
+        <a href="basket.php"><li class="flex-menu-item-top"><div id="circle"><span id="basketNo">
+            <?php
+                global $productCartList;
+                $BasketNo;
+
+                if(!empty($_SESSION['productCartList'])){
+                    $productCartArr = $_SESSION["productCartList"];
+                    $BasketNo = count($productCartArr);
+                    
+                }else{
+                    $BasketNo = 0;
+                }
+                
+                echo $BasketNo;
+            ?>
+        </span></div></li></a>
+        <b><li class="flex-menu-item-top dropdown">
         <?php 
              if(!empty($_SESSION['uname'])){
                 $username = $_SESSION['uname']; 
@@ -40,8 +58,6 @@
                 echo "Your";
             }
         ?> Account &#9660; </li></b>
-        <li class="flex-menu-item-top"><img src="images/login.png" alt="Login/Sign up nav" onclick="document.getElementById('id01').style.display='block'"/></li>
-        <a href="basket.php"><li class="flex-menu-item-top"><img src="images/basket.png" alt="basket nav"/></li></a>
     </ul>
 
     <!-- <div class="mobile"> <img src="hamburgerMenu.png" alt="Mobile menu"/> </div> -->
@@ -119,7 +135,3 @@
     </div>-->
   
 </div>
-
-<script>
-
-</script>
