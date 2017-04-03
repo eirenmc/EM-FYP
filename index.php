@@ -184,7 +184,6 @@
 
                     if(!empty($_GET['productSelectFavId'])){
                         global $conn;
-                       // print_r($userLoggedInId);
                         $prodSelectId = $_GET["productSelectFavId"];
                         
                         try{

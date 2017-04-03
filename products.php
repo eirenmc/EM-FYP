@@ -16,7 +16,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <?php if(!empty($_GET['productBasketId'])){
+        
+        <?php 
+        //This code is set above all other php statements as I need to check if products are in the basket first and display 
+        //the number otherwise it requires a full page refresh or changing of pages to update the basket item total
+        if(!empty($_GET['productBasketId'])){
             //Gets the id stored with each product
             global $conn;
             $productSelectedId = $_GET["productBasketId"];
@@ -37,8 +41,11 @@
             }
         }
         ?>
+
         <?php include "header.php" ?>
+        
         <br>
+
         <?php include "filter.php" ?>
 
         <div class="flex-container-prodPage">
@@ -62,34 +69,32 @@
                     $prodDisplayType = $_GET["prodType"];
                     $productDisplayed = $_GET['productDisplayed'];
 
-                    /* Testing Zone */
-
                     if(!empty($_GET['productFavId'])){
                         global $conn;
-                       // print_r($userLoggedInId);
                         $prodId = $_GET["productFavId"];
-                         print_r($uId);
-                        try{
-                            $stmt = $conn -> prepare('INSERT INTO favourites VALUES (:fId, :uId, :pId)');
-                            
-                            $stmt->bindParam(':fId', $fId);
-                            $stmt->bindParam(':uId', $uId);
-                            $stmt->bindParam(':pId', $pId);
 
-                            $fId = null;
-                            print_r($uId);
-                            $uId = $uId;
-                            $pId = $prodId;
-                        
-                            $stmt->execute();
-                         }catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
+                        if(isset($_SESSION["userId"])){
+                            try{
+                                $stmt = $conn -> prepare('INSERT INTO favourites VALUES (:fId, :uId, :pId)');
+                                
+                                $stmt->bindParam(':fId', $fId);
+                                $stmt->bindParam(':uId', $uId);
+                                $stmt->bindParam(':pId', $pId);
+
+                                $fId = null;
+                                print_r($uId);
+                                $uId = $uId;
+                                $pId = $prodId;
+                            
+                                $stmt->execute();
+                            }catch(PDOException $e){
+                                echo 'ERROR: ' . $e->getMessage();
+                            }
                         }
                     }
 
                     if(!empty($_GET['productSelectFavId'])){
                         global $conn;
-                       // print_r($userLoggedInId);
                         $prodSelectId = $_GET["productSelectFavId"];
                         
                         try{
@@ -110,8 +115,6 @@
                         }
                     }
 
-                    /* End of Testing Zone */
-
                     try{   
                         if($prodDisplayType == 'FV' || $productDisplayed == 'FV'){
                             $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
@@ -128,8 +131,6 @@
                         }else{
                             $insertProducts = $conn->prepare("SELECT * FROM products");
                         }
-                        //Using a prepared statement to select all the products in the products table
-                        //$insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
 
                         //Execute
                         $insertProducts->execute();
@@ -231,74 +232,6 @@
                     }catch(PDOException $e){
                         echo 'ERROR: '.$e -> getMessage();
                     }
-
-                   /* if(!empty($_GET['productFavId'])){
-                        global $conn;
-                       // print_r($userLoggedInId);
-                        $prodId = $_GET["productFavId"];
-                         print_r($uId);
-                        try{
-                            $stmt = $conn -> prepare('INSERT INTO favourites VALUES (:fId, :uId, :pId)');
-                            
-                            $stmt->bindParam(':fId', $fId);
-                            $stmt->bindParam(':uId', $uId);
-                            $stmt->bindParam(':pId', $pId);
-
-                            $fId = null;
-                            print_r($uId);
-                            $uId = $uId;
-                            $pId = $prodId;
-                        
-                            $stmt->execute();
-                         }catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
-                        }
-                    }
-
-                    if(!empty($_GET['productSelectFavId'])){
-                        global $conn;
-                       // print_r($userLoggedInId);
-                        $prodSelectId = $_GET["productSelectFavId"];
-                        
-                        try{
-                            $stmt = $conn -> prepare("DELETE * FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");
-                            
-                            $stmt->bindParam(':fId', $fId);
-                            $stmt->bindParam(':uId', $uId);
-                            $stmt->bindParam(':pId', $pId);
-
-                            $fId = null;
-                            print_r($uId);
-                            $uId = $uId;
-                            $pId = $prodId;
-                        
-                            $stmt->execute();
-                         }catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
-                        }
-                    }*/
-               /*
-                    if(!empty($_GET['productBasketId'])){
-                        //Gets the id stored with each product
-                        $productSelectedId = $_GET["productBasketId"];
-                        
-                        try{  
-                            //Using a prepared statement to select the product that matches the id that is attached to the 
-                            $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
-                            $stat->bindParam(':pId', $productSelectedId);
-                            $stat->execute();
-
-                            echo "Hello World";
-                            //Pushes the selected product into the session
-                            array_push($_SESSION['productCartList'],$productSelectedId);
-                            global $basketNo;
-                            $basketNo = count($_SESSION["productCartList"]);
-                            print_r($_SESSION['productCartList']);           
-                        }
-                        catch(PDOException $e){
-                            echo 'ERROR: ' . $e->getMessage();
-                        }
-                    }*/
                 ?>
                 
             </div>
