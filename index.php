@@ -1,6 +1,7 @@
 <?php 
    session_start();
    include_once "dbCon.php";
+   //print_r($_SESSION['userId']);
 ?>
 <!DOCTYPE html>
     <head>
@@ -15,6 +16,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <?php
+           /* global $uId;
+
+            if(isset($_SESSION["userId"])){
+                $uId = $_SESSION["userId"];
+                echo "Logged in";
+            }else{
+                echo "Nope no user id stored";
+            }
+
+
+            if(!empty($_GET['logout'])){
+                unset($_SESSION['userId']);
+            }else{
+                echo "logout not clicked";
+            }*/
+
+        ?>
 
         <?php include "header.php" ?>
 
@@ -54,6 +73,9 @@
 
                     if(isset($_SESSION["userId"])){
                         $uId = $_SESSION["userId"];
+                        echo "Logged in";
+                    }else{
+                        echo "Nope no user id stored";
                     }
 
                     $prodDisplayType = $_GET["prodType"];

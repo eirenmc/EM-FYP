@@ -117,10 +117,7 @@
                             echo 'ERROR: ' . $e->getMessage();
                         }  
 
-                        echo "<br>Store p id take 3 is:";
-                        print_r($storePId);   
                     }
-                // print_r($_SESSION['productCartList']); 
             ?>
                 
             </div>

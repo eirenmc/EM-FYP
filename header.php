@@ -7,7 +7,7 @@
         $getUserId->execute();
         $userStored = $getUserId->fetch(PDO::FETCH_ASSOC);
                         
-        print_r($userStored['uId']);
+        //print_r($userStored['uId']);
         
         if(isset($_SESSION["userId"])){
             $_SESSION["userId"] = $userStored['uId'];
@@ -24,8 +24,27 @@
         <a href="about.php"><li class="flex-menu-item-top">About</li></a>
         <a href="producer.php"><li class="flex-menu-item-top">Producers</li></a>
         <?php 
+            /*if(!empty($_SESSION['uname'])){
+                $username = $_SESSION['uname'];
+                $getUserId = $conn->prepare("SELECT uId FROM customers WHERE uName ='$username'");
+                $getUserId->execute();
+                $userStored = $getUserId->fetch(PDO::FETCH_ASSOC);
+                
+                if(isset($_SESSION["userId"])){
+                    $_SESSION["userId"] = $userStored['uId'];
+                }else{
+                    $_SESSION["userId"] = $userStored['uId'];
+                }   
+            }   */
+
              if(!empty($_SESSION['uname'])){
                 echo "<li class='flex-menu-item-top'>Favourites</li>";
+                //echo $_SESSION['userId'];
+                
+                /*echo "<form action='index.php' method='GET'>";
+                echo "<input type='hidden' name='logout' value='".$_SESSION['userId']."'>";
+                echo "<input class='flex-menu-item-top button' type='submit' name='Logout' value='Logout'>";
+                echo "</form>";*/
             }
         ?>
     </ul>

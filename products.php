@@ -97,18 +97,8 @@
                         global $conn;
                         $prodSelectId = $_GET["productSelectFavId"];
                         
-                        try{
-                            $stmt = $conn -> prepare("DELETE * FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");
-                            
-                            $stmt->bindParam(':fId', $fId);
-                            $stmt->bindParam(':uId', $uId);
-                            $stmt->bindParam(':pId', $pId);
-
-                            $fId = null;
-                            print_r($uId);
-                            $uId = $uId;
-                            $pId = $prodId;
-                        
+                        try{  
+                            $stmt = $conn -> prepare("DELETE FROM favourites WHERE uId = '$uId' AND pId = '$prodSelectId'");                        
                             $stmt->execute();
                          }catch(PDOException $e){
                             echo 'ERROR: ' . $e->getMessage();
@@ -173,11 +163,11 @@
                                 echo "<span class='scoredRating'>☆</span>";
                                 echo "</span>";
                             }
-                            echo "<form action='productDetail.php' method='GET'>
+                            echo "<form action='productDetail.php' method='GET' class='formBtn'>
                             <input type='hidden'  name='productViewId' value='".$row['pId']."'>
                             <input class='btn ".$row['pId']."' type='submit' value='View Product'></form>";
                             
-                            echo "<form action='products.php' method='GET'>";
+                            echo "<form action='products.php' method='GET' class='formBtn2'>";
                             echo "<input type='hidden'  name='productDisplayed' value='".$row['pType']."'>";
 
                             $currentPId = $row['pId'];
@@ -209,18 +199,18 @@
  
                                if($itAFav == 0){
                                     echo "<input type='hidden'  name='productFavId' value='".$row['pId']."'>";
-                                    echo "<button>&#x2606;</button>";
+                                    echo "<button class='favStar'>&#x2606;</button></form>";
                                }
 
                                if($itAFav == 1){
                                     echo "<input type='hidden'  name='productSelectFavId' value='".$row['pId']."'>";
-                                    echo "<button>&#x2605;</button>";
+                                    echo "<button class='favStar'>&#x2605;</button></form>";
                                }
                             }else{
-                                echo "<button>&#x2606;</button>";
+                                echo "<button class='favStar'>&#x2606;</button></form>";
                             }
                             
-                            echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
+                           // echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
 
                             //Add an if statement to decide which fav button to show
                             echo "<form action='products.php' method='GET'>

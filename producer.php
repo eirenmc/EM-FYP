@@ -39,9 +39,9 @@
                         
                         //Loops through all the products and displays the image, name, price and ass to cart button
                         for($i=0; $i < count($producer); $i++){
+                            $row = $producer[$i];
                             echo "<div class='producerBox'>";
                             echo "<img src='./images/".$row['producerImage'].".jpg' alt='producer'/></br>";
-                            $row = $producer[$i];
                             echo "<center><b>".$row['producerName']."</b><br>";
                             echo "</center>";  
                             echo "<form action='producerDetail.php' method='GET'>

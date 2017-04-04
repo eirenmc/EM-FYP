@@ -78,7 +78,7 @@
                 if(($uname == $userDB['uName']) && ($password == $passwordDB['uPassword'])){
                    // echo "Confirming login";
                   // header("Location: index.php");
-                  echo '<a href="'. $_SERVER['HTTP_REFERER'] . '">Go back</a>';
+                  //echo '<a href="'. $_SERVER['HTTP_REFERER'] . '">Go back</a>';
  
                 }
             }
