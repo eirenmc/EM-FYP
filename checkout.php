@@ -20,8 +20,7 @@
         <div class="content">
             <form class="modal-content" action="placeOrder.php" method="POST">
                 <div class="container">
-                    <br>(9 Form fields)
-                        (6 form fields for payment)
+                    <br>
                     <h2>Contact Details</h2>
                     <label>Email :</label>
                     <input type="text" placeholder="Enter Email Address" name="email" class="field" required>

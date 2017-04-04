@@ -77,7 +77,7 @@
                 //If the username and password match up with the database, the page redirects to the products page
                 if(($uname == $userDB['uName']) && ($password == $passwordDB['uPassword'])){
                    // echo "Confirming login";
-                  // header("Location: index.php");
+                   header("Location: index.php");
                   //echo '<a href="'. $_SERVER['HTTP_REFERER'] . '">Go back</a>';
  
                 }

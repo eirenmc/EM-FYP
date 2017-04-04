@@ -614,3 +614,9 @@ img[alt="delivery"]{
     margin-top: 20%;
 }
 
+
+/*Map*/
+#map{
+    height: 100%;
+}
+
