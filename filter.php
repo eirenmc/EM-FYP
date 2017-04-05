@@ -97,6 +97,18 @@
 </div>
 
 <?php
+  /*  global $conn;
+    $q intval($_GET['q']);
+
+    try{
+        $filterResults = $conn->prepare("SELECT fId FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");
+        $checkFavStatus->execute();
+        $favStatus = $checkFavStatus->fetch(PDO::FETCH_ASSOC);
+    }catch(PDOException $e){
+        echo 'ERROR: ' . $e->getMessage();
+    }*/
+    
+
                 /*    try{                           
                         if($_GET["sortPriceLH"]){
                             //Using a prepared statement to select all the products in the products table

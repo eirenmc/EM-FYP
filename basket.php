@@ -108,7 +108,9 @@
             <div class='container-fluid'>
             <a href="products.php?prodType=BK&submit3=Bakery"><input type='button' name='return' value='Continue Shopping' class='button'></a>
             <center>
-                <form action='checkout.php' method='GET'>
+               <!-- <form action='checkout.php' method='GET'>-->
+                <form action='placeOrder.php' method='POST'>
+                     <input type='number' name='mobileNo'>
                      <input type='submit' name='checkout' value='Proceed To Checkout' class='alignTotal button'>
                 </form>
             </center>
