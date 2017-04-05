@@ -43,7 +43,7 @@
             $filter->execute();
             $filterProduct = $filter->fetchAll(PDO::FETCH_BOTH);
 
-            echo "<table>
+            echo "<table> 
                     <tr>
                         <th>Product Name</th>
                         <th>Price</th>
