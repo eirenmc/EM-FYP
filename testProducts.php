@@ -1,5 +1,4 @@
 <?php 
-   session_start();
    include_once "dbCon.php";
 ?>
 
@@ -17,7 +16,7 @@
 
         <script>
             function showUser(str) {
-                if (str == "") {
+                if(str == "") {
                     document.getElementById("txtHint").innerHTML = "";
                     return;
                 } else { 
@@ -40,7 +39,34 @@
         </script>
 </head>
 <body>
-
+  <div class="flex-container-filter">
+        <div class="flex-item">
+            <div class="titleBar">
+                <h2>Filter By :</h2>
+            </div>
+            <div class="dietFilter">
+                <h3>Dietary Requirements</h3>
+                <form>
+                    <span class="filterCheckbox">
+                        <input type="radio" value="N" name="diet" onchange="showUser(this.value)">Nut Free
+                    </span> 
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" value="O" name="diet" onchange="showUser(this.value)">Organic
+                    </span>
+                    <br>         
+                    <span class="filterCheckbox">
+                        <input type="radio" value="G" name="diet" onchange="showUser(this.value)">Gluten Free
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" value="L" name="diet" onchange="showUser(this.value)">Lactose Intolerant
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+<!--
 <form>
 <select name="users" onchange="showUser(this.value)">
   <option value="">Select a person:</option>
@@ -49,9 +75,52 @@
   <option value="3">Product 3</option>
   <option value="4">Product 4</option>
   </select>
-</form>
-<br>
-<div id="txtHint"><b>Person info will be listed here...</b></div>
+</form>-->
+                <?php
+                  /*  global $conn;
+                    try{
+                        $insertProducts = $conn->prepare("SELECT * FROM products LIMIT 10");
+                        $insertProducts->execute();
+                        $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        for($i=0; $i<count($products); $i++){
+                            echo "<div class='productBox'>";
+                            $row = $products[$i];
+                            echo "<b>".$row['pName']."</b><br>";
+                            echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/><br>";
+                            echo "<b class='alignPrice'> Price: </b> €".$row['pPrice'];
+                            echo "</div>";
+                        }
+                    }catch(PDOException $e){
+                        echo 'ERROR: '.$e -> getMessage();
+                    }
+*/
+                ?>
+<br><!--
+<div id="txtHint"><b>Person info will be listed here...</b></div>-->
+
+<div id="txtHint">
+<?php
+    global $conn;
+    try{
+        $insertProducts = $conn->prepare("SELECT * FROM products LIMIT 10");
+        $insertProducts->execute();
+        $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
+        
+        for($i=0; $i<count($products); $i++){
+            echo "<div class='productBox'>";
+            $row = $products[$i];
+            echo "<b>".$row['pName']."</b><br>";
+            echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/><br>";
+            echo "<b class='alignPrice'> Price: </b> €".$row['pPrice'];
+            echo "</div>";
+        }
+    }catch(PDOException $e){
+        echo 'ERROR: '.$e -> getMessage();
+    }
+
+?>
+</div>
 
 </body>
 </html>

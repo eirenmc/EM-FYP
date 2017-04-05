@@ -32,7 +32,43 @@
     <body>
 
 <?php
-    $q = intval($_GET['q']);
+            /* ------Testing -------- */
+
+            global $conn;
+            try{
+                $q = strval($_GET['q']);
+                //$q = intval($_GET['q']);
+    
+    
+                if(!empty($_GET['q'])){
+                    echo "Not empty";  
+                    echo "<br> Q value is:".$q;
+                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '".$q."'");
+                }else{
+                    $insertProducts = $conn->prepare("SELECT * FROM products");
+                }
+
+                $insertProducts->execute();
+                $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
+                
+                for($i=0; $i<count($products); $i++){
+                    echo "<div class='productBox'>";
+                    $row = $products[$i];
+                    echo "<b>".$row['pName']."</b><br>";
+                    echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/><br>";
+                    echo "<b class='alignPrice'> Price: </b> €".$row['pPrice'];
+                    echo "<b class='alignPrice'> Diet Requirements: </b> €".$row['pDietType'];
+                    echo "</div>";
+                }
+            }catch(PDOException $e){
+                echo 'ERROR: '.$e -> getMessage();
+            }
+
+?>
+
+<?php
+/*
+     $q = intval($_GET['q']);
     if(!empty($_GET['q'])){
         echo "Not emplty";            
         global $conn;
@@ -60,26 +96,14 @@
                 echo "</tr>";
             }
 
-
-           /* $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
-                        
-                        //Loops through all the products and displays the image, name, price and ass to cart button
-                        for($i=0; $i < count($products); $i++){
-                            echo "<div class='productBox'>";
-                            $row = $products[$i];
-                            echo "<center><b>".$row['pName']."</b><br>";
-                            echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/></br>";
-                            echo "</center>";*/
-
-
             echo "</table>";
             //mysqli_close($con);
 
         }catch(PDOException $e){
             echo 'ERROR: ' . $e->getMessage();
         }
-    }
-
+    }*/
+    
 ?>
 </body>
 </html>
