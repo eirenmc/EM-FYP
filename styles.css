@@ -26,6 +26,16 @@ a{
     border:none;
     font-weight: bold;
 }
+
+.flex-container-searchPage{
+    width: 100%;
+    float: left;
+}
+
+.flex-item-search{
+    margin: auto;
+    margin-left: 10%;
+}
 /*
 .flex-container {
   padding: 0;
@@ -487,7 +497,7 @@ img[alt*="front"]{
 /*Index */
 .flex-item-productPop{
     width:100%;
-    margin-left:8%;
+    margin-left:15%;
 }
 
 .productBoxPop{
@@ -641,17 +651,26 @@ img[alt="delivery"]{
     margin-left:4%;
 }
 
+.flex-item-fav{
+    margin:auto;
+    width:100%;
+}
+
 
 /*Map*/
-#map{
-    height: 100%;
+#producerMap{
+    display: -webkit-flex;
+    display: flex;
+    width:50%;
+    height:400px;
+    margin:auto;
 }
 
 
 /* Footer */
 footer{
     width:100%;
-    background-color: #86D03F;
+    background-color: #558428;
     padding:1% 0%;
     margin-top:2%;
     color:white;

@@ -47,9 +47,9 @@
                             echo "<img src='./images/".$row['producerImage'].".jpg' alt='producer'/></br>";
                             echo "<center><b>".$row['producerName']."</b><br>";
                             echo "</center>";  
-                            echo "<form action='producerDetail.php' method='GET'>
+                            /*echo "<form action='producerDetail.php' method='GET'>
                             <input type='hidden'  name='producerViewId' value='".$row['producerId']."'>
-                            <input class='btn2 ".$row['producerId']."' type='submit' value='View Producer'></form></div>";
+                            <input class='btn2 ".$row['producerId']."' type='submit' value='View Producer'></form></div>";*/
                             
                             $currentPId = $row['pId'];
                         }
@@ -61,5 +61,7 @@
             </div>
         </div>
         <br>
-        <iframe src="https://www.google.com/maps/d/embed?mid=1Cxlpp8xZ6U-ZvufNIRdYODxYyH8" width="640" height="480"></iframe> 
+        <iframe src="https://www.google.com/maps/d/embed?mid=1Cxlpp8xZ6U-ZvufNIRdYODxYyH8" id="producerMap"></iframe> 
+        <br>
+        <?php include "footer.php" ?>
         </body>

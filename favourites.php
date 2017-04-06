@@ -42,7 +42,7 @@
 
 
         <div class="flex-container-favPage">
-            <div class="flex-item-product">
+            <div class="flex-item-fav">
                 <?php
 
                     global $productCartList;
@@ -62,7 +62,6 @@
                         $uId = $_SESSION["userId"];
 
                         if(!empty($_GET['productSelectFavId'])){
-                            echo "trying to unfavourite";
                             $prodSelectId = $_GET["productSelectFavId"];
                             
                             try{  

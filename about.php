@@ -1,5 +1,6 @@
 <?php 
-   //session_start();
+   session_start();
+   include_once "dbCon.php";
 ?>
 <!DOCTYPE html>
     <head>
@@ -14,8 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <?php //include "header.php";
-         ?>
+        <?php include "header.php" ?>
         
         <div class="flex-container-aboutPage">
             <div class="flex-item-frontPage">
