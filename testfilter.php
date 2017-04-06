@@ -14,50 +14,37 @@
         <meta name="keywords" content="Local Producers,eccommerce,local,buy,online,shopping">
         <meta name="author" content="Eiren McLoughlin">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <style>
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            table, td, th {
-                border: 1px solid black;
-                padding: 5px;
-            }
-
-            th {text-align: left;}
-        </style>
     </head>
     <body>
 
 <?php
             /* ------Testing -------- */
-
             global $conn;
             try{
-                $q = strval($_GET['q']);
+                $q = strval($_GET['d']);
+                $r = intval($_GET['r']);
+                
                 //$q = intval($_GET['q']);
     
     
-                if(!empty($_GET['q'])){
-                    echo "Not empty";  
-                    echo "<br> Q value is:".$q;
-                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '".$q."'");
-                }else{
+                if((!empty($_GET['d'])) || (!empty($_GET['r']))){
+                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$d' OR pRating = '$r'");
+                }/*else if(!empty($_GET['q'])){
+                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$q'");
+                }else if(!empty($_GET['r'])){
+                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pRating = '$r'");
+                }*/else{
                     $insertProducts = $conn->prepare("SELECT * FROM products");
                 }
 
                 $insertProducts->execute();
                 $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
-                
                 for($i=0; $i<count($products); $i++){
                     echo "<div class='productBox'>";
                     $row = $products[$i];
                     echo "<b>".$row['pName']."</b><br>";
                     echo "<img src='./images/".$row['pImage'].".jpg' alt='product'/><br>";
                     echo "<b class='alignPrice'> Price: </b> €".$row['pPrice'];
-                    echo "<b class='alignPrice'> Diet Requirements: </b> €".$row['pDietType'];
                     echo "</div>";
                 }
             }catch(PDOException $e){

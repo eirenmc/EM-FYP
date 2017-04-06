@@ -1,5 +1,5 @@
         <footer>
-            <p>Copyright By Eiren McLoughlin</p>
+            <p>Copyright © 2017 - <b>Eiren McLoughlin</b></p>
         </footer>
     </body>
 </html>

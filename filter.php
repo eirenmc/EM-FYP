@@ -44,7 +44,7 @@
         </div>
         <hr>
         <div class="originFilter">
-            <h3>Product Origin</h3>
+            <h3>Produced In:</h3>
             <p>(50 mile radius from each location in included)</p>
             <form>
                 <span class="filterCheckbox">

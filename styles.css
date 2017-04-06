@@ -182,7 +182,7 @@ img[alt*="nav"]{
 }
 
 .icon{
-    padding:10px 20px;
+    padding:12px 20px;
     background-color:#86D03F;
     border:none;
     cursor: pointer;
@@ -541,6 +541,25 @@ img[alt="delivery"]{
     margin: auto;
 }*/
 
+.x{
+    position: relative;
+    left: -25px;
+    top: 15px;
+}
+
+.close {
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+
 /* Basket */
 #circle {
       width: 20px;
@@ -614,9 +633,32 @@ img[alt="delivery"]{
     margin-top: 20%;
 }
 
+.flex-container-favPage{
+    display:flex;
+    margin:auto;
+    width:95%;
+    float:left; 
+    margin-left:4%;
+}
+
 
 /*Map*/
 #map{
     height: 100%;
+}
+
+
+/* Footer */
+footer{
+    width:100%;
+    background-color: #86D03F;
+    padding:1% 0%;
+    margin-top:2%;
+    color:white;
+    overflow:auto;
+}
+
+footer p{
+    padding-left:2%;
 }
 

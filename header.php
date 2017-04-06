@@ -38,7 +38,7 @@
             }   */
 
              if(!empty($_SESSION['uname'])){
-                echo "<li class='flex-menu-item-top'>Favourites</li>";
+                echo "<a href='favourites.php'><li class='flex-menu-item-top'>Favourites</li></a>";
                 //echo $_SESSION['userId'];
                 
                 /*echo "<form action='index.php' method='GET'>";
@@ -126,7 +126,9 @@
 
 <div id="id01" class="modal">
     <div class="content">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <div id="x">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
         <form class="modal-content" action="loginUser.php" method="POST">
             <div class="container">
                 <br>

@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
     <head>
+        <script src="script.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css"/>
@@ -68,6 +69,8 @@
 
                     $prodDisplayType = $_GET["prodType"];
                     $productDisplayed = $_GET['productDisplayed'];
+
+                    $_SESSION['productDisplayed'] = $prodDisplayType;
 
                     if(!empty($_GET['productFavId'])){
                         global $conn;
@@ -177,11 +180,6 @@
                                 $checkFavStatus;
                                 $itAFav;
                                 $favStatus;
-
-                            /*  echo "uId value:";
-                                var_dump($uId);
-                                echo "CurrentId value:";
-                                var_dump($currentPId);*/
                                
                                try{
                                     $checkFavStatus = $conn->prepare("SELECT fId FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");

@@ -48,6 +48,7 @@
         <br>
         <div class="flex-container-frontPage">
             <div class="flex-item-frontPage">
+                <p>'BuyLocal is an ecommerce's and mobile networking platform for local consumers and local producers to support growth in the local economy</p>
                 <p> Buy Local provides you with easy accessibilty to purchase locally produced products. You can quickly find out about different local producers, where your food is coming from and and guaranteeing you high quality local produce the way you want it.</p>
                 <p> With Buy Local you can be assured that you are buying local ! </p>
             </div>

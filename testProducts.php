@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script>
-            function showUser(str) {
+            function showDiet(str) {
                 if(str == "") {
                     document.getElementById("txtHint").innerHTML = "";
                     return;
@@ -32,7 +32,29 @@
                             document.getElementById("txtHint").innerHTML = this.responseText;
                         }
                     };
-                    xmlhttp.open("GET","testfilter.php?q="+str,true);
+                    xmlhttp.open("GET","testfilter.php?d="+str,true);
+                    xmlhttp.send();
+                }
+            }
+
+            function showRating(str) {
+                if(str == "") {
+                    document.getElementById("txtHint").innerHTML = "";
+                    return;
+                } else { 
+                    if (window.XMLHttpRequest) {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("txtHint").innerHTML = this.responseText;
+                        }
+                    };
+                    xmlhttp.open("GET","testfilter.php?r="+str,true);
                     xmlhttp.send();
                 }
             }
@@ -48,21 +70,48 @@
                 <h3>Dietary Requirements</h3>
                 <form>
                     <span class="filterCheckbox">
-                        <input type="radio" value="N" name="diet" onchange="showUser(this.value)">Nut Free
+                        <input type="radio" value="N" name="diet" onchange="showDiet(this.value)">Nut Free
                     </span> 
                     <br>
                     <span class="filterCheckbox">
-                        <input type="radio" value="O" name="diet" onchange="showUser(this.value)">Organic
+                        <input type="radio" value="O" name="diet" onchange="showDiet(this.value)">Organic
                     </span>
                     <br>         
                     <span class="filterCheckbox">
-                        <input type="radio" value="G" name="diet" onchange="showUser(this.value)">Gluten Free
+                        <input type="radio" value="G" name="diet" onchange="showDiet(this.value)">Gluten Free
                     </span>
                     <br>
                     <span class="filterCheckbox">
-                        <input type="radio" value="L" name="diet" onchange="showUser(this.value)">Lactose Intolerant
+                        <input type="radio" value="L" name="diet" onchange="showDiet(this.value)">Lactose Intolerant
                     </span>
                 </form>
+            </div>
+            <div class="ratingFilter">
+                <h3>Rating</h3>
+                <input type="radio" name="diet" value="1" onchange="showRating(this.value)">
+                <span class='rating five'>
+                <span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="diet" value="2" onchange="showRating(this.value)">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="diet" value="3" onchange="showRating(this.value)">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="diet" value="4" onchange="showRating(this.value)">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="diet" value="5" onchange="showRating(this.value)">
+                <span class='rating five'>
+                <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
             </div>
         </div>
     </div>
