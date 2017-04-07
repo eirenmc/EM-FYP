@@ -19,51 +19,53 @@
         
         <div class="content">
             <form class="modal-content" action="placeOrder.php" method="POST">
-                <div class="container">
+                <div class="container processOrder">
                     <br>
                     <h2>Contact Details</h2>
-                    <label>Email :</label>
-                    <input type="text" placeholder="Enter Email Address" name="email" class="field" required>
+                    <br>
+                    <label>Email :</label><br>
+                    <input type="text"name="email" class="field fieldSpace" required>
                     <br><br>
-                    <label>Phone Number :</label>
-                    <input type="number" placeholder="Enter Phone Number" name="phoneNo" class="field" required>
-                    <br><br>
+                    <label>Mobile Number :</label>
+                    <br>
+                    <input type="number" name="mobileNo" class="field fieldSpace" required>
+                    <br>
+                    <br>
+                    <br>
 
                     <h2>Shipping Address</h2>
-                    <label>Full Name :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <br>
+                    <label>Full Name :</label><br>
+                    <input type="text" name="fullName" class="field fieldSpace" required>
                     <br><br>
-                    <label>Address line 1 :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <label>Address line :</label><br>
+                    <input type="text" name="address" class="field fieldSpace" required>
                     <br><br>
-                    <label>Address line 2 :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <label>Town/City :</label><br>
+                    <input type="text" name="town" class="field fieldSpace" required>
                     <br><br>
-                    <label>Town/City :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <label>County :</label><br>
+                    <input type="text" name="county" class="field fieldSpace" required>
                     <br><br>
-                    <label>County/State :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
-                    <br><br>
-                    <label>Postcode/Zip :</label>
-                    <input type="number" placeholder="Enter Password" name="password" class="field" required>
-                    <br><br>
-                    <label>Country :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <label>Country :</label><br>
+                    <input type="text" name="country" class="field fieldSpace" required>
                     <br><br>
 
                     <h2>Payment Details</h2>
+                    <img src="/images/visa.png" alt="card" width="50px" height="50px"/>
+                    <img src="images/mastercard.png" alt="card" width="50px" height="50px"/>
+                    <br>
                     <label>Card Type :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
+                    <br>
                     <select>
                         <option value="visa" name="cardType">Visa</option>
                         <option value="mastercard" name="cardType">Mastercard</option>
                     </select>
                     <br><br>
-                    <label>Card Number :</label>
-                    <input type="number" name="cardNo" class="field" required>
+                    <label>Card Number :</label><br>
+                    <input type="number" name="cardNo" class="field fieldSpace" required>
                     <br><br>
-                    <label>Valid To :</label>
+                    <label>Valid To :</label><br>
                     <select>
                         <option value="01" name="validFromMonth">01</option>
                         <option value="02" name="validFromMonth">02</option>
@@ -93,20 +95,31 @@
                         <option value="2028" name="validToYear">2028</option>
                         <option value="2029" name="validToYear">2029</option>
                         <option value="2030" name="validToYear">2030</option>
-                        <option value="2031" name="validToYear">2031</option>
-                        <option value="2032" name="validToYear">2032</option>
-                        <option value="2033" name="validToYear">2033</option>
-                        <option value="2034" name="validToYear">2034</option>
-                        <option value="2035" name="validToYear">2035</option>
                     </select>
-                    <br><br>
-                    <label>Name on Card :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
-                    <br><br>
-                    <label>CVV2 Number :</label>
-                    <input type="text" placeholder="Enter Password" name="password" class="field" required>
-                    <br><br>
-                    <button class="button" type="submit">Login</button>
+                    <br>
+                    <br>
+                    <label>Name on Card :</label><br>
+                    <input type="text" name="cardName" class="field fieldSpace" required>
+                    <br>
+                    <br>
+                    <label>CVV2 Number :</label><br>
+                    <input type="text" name="cvv2" class="field fieldSpace" required>
+                    <br>
+                    <br>
+                    <?php
+                        global $pSumTotal;
+
+                        $productTotal = array();
+                        $pSumTotal = $_GET['totalBasket'];
+
+                        if(!empty($_GET['totalBasket'])){
+                            echo "<input type='hidden' name='orderAmount' value='".$pSumTotal."'>";
+                        }
+                    ?>
+                    <form action='placeOrder.php' method='GET'>
+                        <button type='submit' name='placeOrder' value='Place Order' class="button">Place Order </button>
+                    </form>
+                    <!--<button class="button" type="submit">Place Order</button>-->
                 </div>
             </form>
         </div>
@@ -115,58 +128,53 @@
             <h4>Basket Summary</h4>
             <?php
 
-            global $productCartList;
-            global $productTotal;
-            global $pSumTotal;
+                global $pSumTotal;
+                global $productCartList;
+                global $productTotal;
 
-            $productTotal = array();
-            
-            if(!empty($_SESSION['productCartList'])){
-                $productCartList = $_SESSION["productCartList"];
+                $productTotal = array();
+                $pSumTotal = $_GET['totalBasket'];
 
-                try{    
-  
-                    //Loops through the product array session
-                    for($pNumber = 0; $pNumber < count($productCartList); $pNumber++){
-                        $arrNum = $productCartList[$pNumber];
-                        
-                        $pBasketView = $conn->prepare("SELECT * FROM products WHERE pId = :pId");   
-                        $pBasketView->bindParam(':pId', $arrNum);
-                        $pBasketView->execute();
-
-                        //Fetchs the database details
-                        $row = $pBasketView->fetch(PDO::FETCH_ASSOC);
-                        extract($row);
-                        echo "<p".$row['pName']."</p>";
-                        echo "<em><p> Quantity: </p></em>";
-                        echo "<div class='quantity'>";
-                        echo "</div>";
-
-                        echo "<form action='basket.php' method='GET' class='formBtn'>
-                            <input type='hidden'  name='removeFromBasket' value='".$row['pId']."'>
-                           <b><input class='button alignTotal ".$row['pId']."' type='submit' value='Remove Item'></b></form>";
-
-                        echo "<h3 class='alignRight'> €".$row['pPrice']."</h3></div></div></br><hr class='basketHr'>";
-                         $productTotal[] = $row['pPrice'];
-                        
-                        
-                        //print_r($_SESSION['productCartList']);     
-                    }
-
-                    //array_push($productTotal);
-                    //print_r($productTotal);
-                    $pSumTotal = array_sum($productTotal);
-                        echo "</br><div class='container-fluid'>";
-                        echo "<h1 class='alignTotal'>Total: €".$pSumTotal."</h1></div></div>";
-                    //Place order button
-                    /*echo "<center><form action='checkout.php' method='GET'>
-                    <input type='submit' name='checkout' value='Proceed To Checkout'>";
-                    echo "</form></center></br>";*/
+                if(!empty($_GET['totalBasket'])){
+                    echo $pSumTotal;
                 }
-                catch(PDOException $e){
-                    echo 'ERROR: '.$e -> getMessage();
-                }          
-        }else{
+            
+                if(!empty($_SESSION['productCartList'])){
+                    echo "Access to products array";
+                    $productCartList = $_SESSION["productCartList"];
+                    var_dump($productCartList);
+
+                    try{    
+    
+                        //Loops through the product array session
+                        for($pNumber = 0; $pNumber < count($productCartList); $pNumber++){
+                            $arrNum = $productCartList[$pNumber];
+                            
+                            $pBasketView = $conn->prepare("SELECT * FROM products WHERE pId = :pId");   
+                            $pBasketView->bindParam(':pId', $arrNum);
+                            $pBasketView->execute();
+
+                            //Fetchs the database details
+                            $row = $pBasketView->fetch(PDO::FETCH_ASSOC);
+                            extract($row);
+                            echo "<p".$row['pName']."</p>";
+                            echo "<p".$row['pPrice']."</p>";
+
+                            $productTotal[] = $row['pPrice']; 
+                        }
+
+                        $pSumTotal = array_sum($productTotal);
+                            echo "</br><div class='container-fluid'>";
+                            echo "<h1 class='alignTotal'>Total: €".$pSumTotal."</h1></div></div>";
+                        //Place order button
+                       /* echo "<center><form action='placeOrder.php' method='GET'>
+                        <input type='submit' name='placeOrder' value='Place Order'>";
+                        echo "</form></center></br>";*/
+                    }
+                    catch(PDOException $e){
+                        echo 'ERROR: '.$e -> getMessage();
+                    }          
+            }
             ?>
         </div>
         
