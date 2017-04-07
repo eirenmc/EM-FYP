@@ -114,7 +114,6 @@
             <div class='container-fluid'>
             <a href="products.php?prodType=BK&submit3=Bakery"><input type='button' name='return' value='Continue Shopping' class='button'></a>
             <center>
-                <!-- <form action='placeOrder.php' method='POST'>-->
                 <?php
                     //Checks if the shopping baskeet/cart is empty if not it renders a checkout button and shows the subtotal of
                     //all the products giving the user the total cost

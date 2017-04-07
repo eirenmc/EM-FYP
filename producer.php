@@ -45,10 +45,7 @@
                             echo "<div class='producerBox'>";
                             echo "<img src='./images/".$row['producerImage'].".jpg' alt='producer'/></br>";
                             echo "<center><b>".$row['producerName']."</b><br>";
-                            echo "</center>";  
-                            /*echo "<form action='producerDetail.php' method='GET'>
-                            <input type='hidden'  name='producerViewId' value='".$row['producerId']."'>
-                            <input class='btn2 ".$row['producerId']."' type='submit' value='View Producer'></form>";*/
+                            echo "</center>"; 
                             echo "</div>";
                             
                             $currentPId = $row['pId'];

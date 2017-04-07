@@ -1,6 +1,7 @@
  <?php
-    //Starts/Resumes sessions
+    //Start or restore session variables
     session_start();
+    //Including the database connection file
     include_once "dbCon.php";
 ?>
  <!DOCTYPE html>
@@ -17,15 +18,19 @@
     </head>
     <body>
         <?php
-
-            if(!empty($_GET['productBasketId'])){
+        //This code is set above all other php statements as I need to check if products are in the basket first and display 
+        //the number otherwise it requires a full page refresh or changing of pages to update the basket item total
+        if(!empty($_GET['productBasketId'])){
+                //Gets the id stored with each product
                 global $conn;
                 $productSelectedId = $_GET["productBasketId"];
                 
                 try{  
+                    //Using a prepared statement to select the product that matches the id that is attached to the product
                     $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
                     $stat->bindParam(':pId', $productSelectedId);
                     $stat->execute();
+                    //Pushes the selected product into the session
                     array_push($_SESSION['productCartList'],$productSelectedId);         
                 }
                 catch(PDOException $e){
@@ -38,10 +43,12 @@
         <div class="flex-container-searchPage">
             <div class="flex-item-search">
                 <?php
+                    //Global Variables
                     global $productCartList;
                     global $uId;
                     global $term;
 
+                    //Checks if there is a session for the cart
                     if(isset($_SESSION["productCartList"])){
                         $productCartArr = $_SESSION["productCartList"];
                     }else{
@@ -58,6 +65,7 @@
 
                     $_SESSION['productDisplayed'] = $prodDisplayType;
 
+                    //Inserts into the favourites if the user is logged in and they press the star button
                     if(!empty($_GET['productFavId'])){
                         global $conn;
                         $prodId = $_GET["productFavId"];
@@ -81,29 +89,37 @@
                         }
                     }
 
+                    //If the user clicks on the favourite star (That has already been favourite as this line would 
+                    //not execute if the user didnt already have the product as a favourite), it removes it from the favourites
                     if(!empty($_GET['productSelectFavId'])){
                         global $conn;
                         $prodSelectId = $_GET["productSelectFavId"];
                         
                         try{  
+                            //Deletes favourite
                             $stmt = $conn -> prepare("DELETE FROM favourites WHERE uId = '$uId' AND pId = '$prodSelectId'");                        
                             $stmt->execute();
                          }catch(PDOException $e){
                             echo 'ERROR: ' . $e->getMessage();
                         }
                     }
-
+                    //Checks if search term is not empty that current search products will redisplay if one
+                    //is added to basket or made a favourite
                     if((!empty($_POST['searchTerm'])) || (!empty($_GET['productSearchDisplayed']))){
-                        
+                        //Decides the terms based on whether the user just entered a search
                         if(!empty($_GET['productSearchDisplayed'])){
                             $term = $_GET['productSearchDisplayed'];
+                        
+                        //Or is reloading the page because of adding a product to the basket or making a favourite
                         }else if(!empty($_POST['searchTerm'])){
                             $term = $_POST['searchTerm'];
                         }   
                         
+                        //Makes the term being searching into lowercase to stop case sensitivity
                         $term = strtolower($term);
 
                         try{
+                            //Tries to select products from database based on the term
                             if($term == 'meat' || $term == 'fish' || $term == 'poultry' || $term == 'chicken'){
                                 $searchProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
                             }else if($term == 'fruit' || $term == 'veg' || $term == 'vegetable'){
@@ -179,7 +195,7 @@
                                     $itAFav;
                                     $favStatus;
                                 
-                                try{
+                                    try{
                                         $checkFavStatus = $conn->prepare("SELECT fId FROM favourites WHERE uId = '$uId' AND pId = '$currentPId'");
                                         $checkFavStatus->execute();
                                         $favStatus = $checkFavStatus->fetch(PDO::FETCH_ASSOC);

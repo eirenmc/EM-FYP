@@ -32,7 +32,7 @@
                 $stat->bindParam(':pId', $productSelectedId);
                 $stat->execute();
 
-                echo "Hello World";
+                //echo "Hello World";
                 //Pushes the selected product into the session
                 array_push($_SESSION['productCartList'],$productSelectedId);
                // print_r($_SESSION['productCartList']);           
@@ -46,8 +46,6 @@
         <?php include "header.php" ?>
         
         <br>
-
-        <?php //include "filter.php" ?>
         <!-- Filter Start -->
         <div class="flex-container-filter">
             <div class="flex-item">
@@ -55,6 +53,18 @@
                 <div class="titleBar">
                     <h2>Filter By :</h2>
                 </div>
+                  <!--  <div class="priceFilter">
+                        <h3>Price</h3>
+                        <button type="button" name="price" value="lh" class="buttonSort">Low - High</button>
+                        <button type="button" name="price" value="hl" class="buttonSort">High - Low</button>
+                    </div>
+                    <hr>
+                    <div class="sortFilter">
+                        <h3>Sort</h3>
+                        <button type="button" name="sortName" value="az" class="buttonSort2">A - Z</button>
+                        <button type="button" name="sortName" value="za" class="buttonSort2">Z - A</button>
+                    </div>
+                <hr>-->
                 <div class="ratingFilter">
                 <h3>Rating</h3>
                 <input type="radio" name="rating" value="1">
@@ -83,22 +93,9 @@
                 </span>
             </div>
             <hr>
-            <div class="priceFilter">
-                <h3>Price</h3>
-                <button class="button">Low - High</button>
-                <button class="button">High - Low</button>
-            </div>
-            <hr>
-            <div class="sortFilter">
-                <h3>Sort</h3>
-                <button class="button">A - Z</button>
-                <button class="button">Z - A</button>
-            </div>
-            <hr>
             <div class="originFilter">
                 <h3>Produced In:</h3>
                 <p>(50 mile radius from each location in included)</p>
-                <!-- <form> -->
                     <span class="filterCheckbox">
                         <input type="radio" name="origin" value="Clonmel">Clonmel
                     </span>
@@ -122,12 +119,10 @@
                     <span class="filterCheckbox">
                         <input type="radio" name="origin" value="Mitchlestown">Mitchlestown
                     </span>
-               <!-- </form>-->
             </div>
             <hr>
             <div class="dietFilter">
             <h3>Dietary Requirements</h3>
-           <!-- <form> -->
                 <span class="filterCheckbox">
                     <input type="radio" value="N" name="diet">Nut Free
                 </span> 
@@ -152,18 +147,16 @@
                     }
                     
                     $_SESSION['productType'] = $productType;
-                    echo $productType;
+                    //echo $productType;
                     echo "<input type='hidden' name='filterStoredType' value='".$_SESSION['productType']."'>";
                 ?>
+                <br>
+                <br>
                 <input class='btn2' type='submit' value='Filter Products'>      
-           <!-- </form>-->
         </div>
         </form>
     </div>
 </div>
-
-        <!-- Filter End -->
-
         <div class="flex-container-prodPage">
             <div class="flex-item-product">
                 <?php
@@ -171,6 +164,7 @@
                     global $productCartList;
                     global $uId;
                     global $typePage;
+                    $type;
 
                    /* $page = $_SERVER["REQUEST_URI"];
                     $_SESSION['page'] = $page;
@@ -232,29 +226,48 @@
                         }
                     }
 
-                    $type;
-
                     if(!empty($_GET['filterStoredType'])){
                         $type = $_GET['filterStoredType'];
-                        echo "Type chosen is : ".$type;
+                        //echo "Type chosen is : ".$type;
                     }
                     if(!empty($_GET['diet'])){
                         $diet = $_GET['diet'];
-                        echo "Diet chosen is : ".$diet;
+                        //echo "Diet chosen is : ".$diet;
                     }
                     if(!empty($_GET['origin'])){
                         $origin = $_GET['origin'];
-                        echo "origin chosen is : ".$origin;
+                        //echo "origin chosen is : ".$origin;
                     }
                     if(!empty($_GET['rating'])){
                         $rating = $_GET['rating'];
-                        echo "rating chosen is : ".$rating;
+                        //echo "rating chosen is : ".$rating;
                     }
+                  /*  if(!empty($_GET['price'])){
+                        $price = $_GET['price'];
+                    }
+                    if(!empty($_GET['sortName'])){
+                        $sortName = $_GET['sortName'];
+                    }*/
                     
                     try{   
                         if($prodDisplayType == 'FV' || $productDisplayed == 'FV' || $type == 'FV'){
                             if(!empty($_GET['filterStoredType'])){
-                                
+                                /*
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating'])) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating' ASC");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin'])) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pRating='$rating' ASC");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pOrigin='$origin' ASC");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating'])) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pRating='$rating' ASC");
+                                }else if(!empty($_GET['diet']) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' ASC");
+                                }else if(!empty($_GET['origin']) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pOrigin='$origin' ASC");
+                                }else if(!empty($_GET['rating']) && ($price == 'az')){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pRating='$rating' ASC");
+                                }else*/ 
                                 if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
                                     $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
                                 }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
@@ -363,7 +376,7 @@
                             }else{
                                 $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
                             }
-                        }else if($prodDisplayType == 'DE' || $productDisplayed == 'DE'){
+                        }else if($prodDisplayType == 'DE' || $productDisplayed == 'DE' || $type == 'DE'){
                             if(!empty($_GET['filterStoredType'])){
                                 
                                 if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
@@ -385,6 +398,7 @@
                             }else{
                                 $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
                             }
+                        }
                         else{
                             $insertProducts = $conn->prepare("SELECT * FROM products");
                         }
@@ -394,6 +408,10 @@
 
                         //fetches all the products from the database
                         $products = $insertProducts->fetchAll(PDO::FETCH_ASSOC);
+
+                        if(count($products) == 0){
+                            echo "<p>Sorry were no products that match your filtering </p>";
+                        }
                         
                         //Loops through all the products and displays the image, name, price and ass to cart button
                         for($i=0; $i < count($products); $i++){
@@ -470,9 +488,7 @@
                                }
                             }else{
                                 echo '<button class="favStar">&#x2606;</button></form>';
-                            }
-                            
-                           // echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
+                            }       
 
                             //Add an if statement to decide which fav button to show
                             echo "<form action='products.php' method='GET'>

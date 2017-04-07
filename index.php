@@ -1,7 +1,6 @@
 <?php 
    session_start();
    include_once "dbCon.php";
-   //print_r($_SESSION['userId']);
 ?>
 <!DOCTYPE html>
     <head>
@@ -43,9 +42,12 @@
                 }
             }
 
+            //Checks if value recieved from the logout button
             if(!empty($_GET['logout'])){
+                //if so it unsets the session so the user is no longer logged in
                 unset($_SESSION['userId']);
                 unset($_SESSION['uname']);
+                //Message notifying the user they have logged out
                 echo "<div id='logoutBox'>
                         <h3>You have successfully logged out</h3>
                     </div>";
@@ -179,7 +181,7 @@
                             <input type='hidden'  name='productViewId' value='".$row['pId']."'>
                             <input class='btn ".$row['pId']."' type='submit' value='View Product'></form>";
                             
-                            echo "<form action='products.php' method='GET' class='formBtn2'>";
+                            echo "<form action='index.php' method='GET' class='formBtn2'>";
                             echo "<input type='hidden'  name='productDisplayed' value='".$row['pType']."'>";
 
                             $currentPId = $row['pId'];
@@ -218,7 +220,7 @@
                             }          
 
                             //Add an if statement to decide which fav button to show
-                            echo "<form action='products.php' method='GET'>
+                            echo "<form action='index.php' method='GET'>
                             <input type='hidden'  name='productBasketId' value='".$row['pId']."'>
                             <input type='hidden'  name='productDisplayed' value='".$row['pType']."'>
                             <input class='btn2 ".$row['pId']."' type='submit' value='Add To Cart'></form>";
@@ -235,6 +237,7 @@
     <?php include "deliveryInfo.php" ?>
     <?php include "footer.php" ?>
     <script>
+        /* Javascript code to timeout the logout notification box */
         document.getElementById('logoutBox').style.display = 'block';
         setTimeout(function() {
             document.getElementById('logoutBox').style.display = 'none';

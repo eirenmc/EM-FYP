@@ -1,15 +1,22 @@
 <?php
-    session_start();    
+    //Start or restore session variables
+    session_start();
+    //Including the database connection file
     include_once "dbCon.php";
    
+   //Check that the session uname is not empty, the uname session is used to display the username in the top right corner
     if(!empty($_SESSION['uname'])){
+        //Makes the username variable equal the value stored in the session
         $username = $_SESSION['uname'];
+        //Gets the user infomation from the Database
         $getUserId = $conn->prepare("SELECT uId FROM customers WHERE uName ='$username'");
+        //Executes the database select
         $getUserId->execute();
+        //Fetches database query results and stores them in a variable
         $userStored = $getUserId->fetch(PDO::FETCH_ASSOC);
                         
-        //print_r($userStored['uId']);
-        
+        //Checks if the userId session is checked in order to access and insert and delete things such as favourites 
+        //based on the correct user id rather than username
         if(isset($_SESSION["userId"])){
             $_SESSION["userId"] = $userStored['uId'];
         }else{
@@ -24,7 +31,8 @@
     <ul class="flex-container wrap left">
         <a href="about.php"><li class="flex-menu-item-top">About</li></a>
         <a href="producer.php"><li class="flex-menu-item-top">Producers</li></a>
-        <?php 
+        <?php
+            //If a user is logged in based on the userame session it will show the favourites menu item
              if(!empty($_SESSION['uname'])){
                 echo "<a href='favourites.php'><li class='flex-menu-item-top'>Favourites</li></a>";                
             }
@@ -34,7 +42,7 @@
     <ul class="flex-container wrap right">
         <b><li class="flex-menu-item-top dropdown" onclick="document.getElementById('id01').style.display='block'">
         <?php 
-            //Switches the variable and assign it the value of the session
+            //If the user is logged in, the menu will greet the user otherwise it will default to Login to Account
              if(!empty($_SESSION['uname'])){
                 $username = $_SESSION['uname']; 
                 print_r("Hi ".$username);
@@ -74,7 +82,7 @@
                                 //Results a basket value of 0
                                 $BasketNo = 0;
                             }
-                            
+                            //Shows the number of items in the basket
                             echo $BasketNo;
                         ?>
                     </span>
@@ -141,7 +149,7 @@
                     <br>
                     <br>
                     <div class="form-group">
-                        <label>Email :</label>
+                        <label>Username :</label>
                         <input type="text" placeholder="Enter Username" name="uname" class="field" required>
                     </div>
                     <br>
@@ -162,9 +170,4 @@
         <a href="register.php"><button class="button">Register an Account</button></a></center><br>
         </div>
     </div>
-<!--
-    <div class="container" style="background-color:#f1f1f1">
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>-->
-  
 </div>

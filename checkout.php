@@ -1,6 +1,8 @@
-<?php 
-   session_start();
-   include_once "dbCon.php";
+<?php
+    //Start or restore session variables
+    session_start();
+    //Including the database connection file
+    include_once "dbCon.php";
 ?>
 <!DOCTYPE html>
     <head>
@@ -16,15 +18,16 @@
     </head>
     <body>
         <?php include "header.php" ?>
-        
+        <!-- HTML content for the checkout form -->
         <div class="content">
             <form class="modal-content" action="placeOrder.php" method="POST">
                 <div class="container processOrder">
                     <br>
+                    
                     <h2>Contact Details</h2>
                     <br>
                     <label>Email :</label><br>
-                    <input type="text"name="email" class="field fieldSpace" required>
+                    <input type="text" name="email" class="field fieldSpace" required>
                     <br><br>
                     <label>Mobile Number :</label>
                     <br>
@@ -107,74 +110,41 @@
                     <br>
                     <br>
                     <?php
+                        //Global variable to access the total of the basket cost
                         global $pSumTotal;
 
+                        //Storing and getting the value in the order total being passed on from the basket page
                         $productTotal = array();
                         $pSumTotal = $_GET['totalBasket'];
 
+                        //Checks if the basket page is not empty and if so displays the order total
                         if(!empty($_GET['totalBasket'])){
                             echo "<input type='hidden' name='orderAmount' value='".$pSumTotal."'>";
                         }
                     ?>
-                    <form action='placeOrder.php' method='GET'>
+                    <div class="BasketSummary">
+                        <h2>Basket Total:</h2>
+                        <?php
+                            //Global variable to access the total of the basket cost
+                            global $pSumTotal;
+                            global $productTotal;
+
+                            //Storing and getting the value in the order total being passed on from the basket page
+                            $productTotal = array();
+                            $pSumTotal = $_GET['totalBasket'];
+
+                            //Checks if the basket page is not empty and if so displays the order total
+                            if(!empty($_GET['totalBasket'])){
+                                echo "<h1>".$pSumTotal."</h1>";
+                                echo "<input type='hidden' value='.$pSumTotal.' name='orderAmount'>";
+                            }
+                        ?>
+                        <br>
                         <button type='submit' name='placeOrder' value='Place Order' class="button">Place Order </button>
-                    </form>
-                    <!--<button class="button" type="submit">Place Order</button>-->
                 </div>
             </form>
         </div>
-
-        <div class="BasketSummary">
-            <h4>Basket Summary</h4>
-            <?php
-
-                global $pSumTotal;
-                global $productCartList;
-                global $productTotal;
-
-                $productTotal = array();
-                $pSumTotal = $_GET['totalBasket'];
-
-                if(!empty($_GET['totalBasket'])){
-                    echo $pSumTotal;
-                }
-            
-                if(!empty($_SESSION['productCartList'])){
-                    echo "Access to products array";
-                    $productCartList = $_SESSION["productCartList"];
-                    var_dump($productCartList);
-
-                    try{    
-    
-                        //Loops through the product array session
-                        for($pNumber = 0; $pNumber < count($productCartList); $pNumber++){
-                            $arrNum = $productCartList[$pNumber];
-                            
-                            $pBasketView = $conn->prepare("SELECT * FROM products WHERE pId = :pId");   
-                            $pBasketView->bindParam(':pId', $arrNum);
-                            $pBasketView->execute();
-
-                            //Fetchs the database details
-                            $row = $pBasketView->fetch(PDO::FETCH_ASSOC);
-                            extract($row);
-                            echo "<p".$row['pName']."</p>";
-                            echo "<p".$row['pPrice']."</p>";
-
-                            $productTotal[] = $row['pPrice']; 
-                        }
-
-                        $pSumTotal = array_sum($productTotal);
-                            echo "</br><div class='container-fluid'>";
-                            echo "<h1 class='alignTotal'>Total: €".$pSumTotal."</h1></div></div>";
-                        //Place order button
-                       /* echo "<center><form action='placeOrder.php' method='GET'>
-                        <input type='submit' name='placeOrder' value='Place Order'>";
-                        echo "</form></center></br>";*/
-                    }
-                    catch(PDOException $e){
-                        echo 'ERROR: '.$e -> getMessage();
-                    }          
-            }
-            ?>
         </div>
+        <?php include "footer.php" ?>
+    </body>
         

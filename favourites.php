@@ -19,7 +19,7 @@
     </head>
     <body>
         <?php
-
+            //Checks if the productBasketId is not empty meaning a product was added to the basket
             if(!empty($_GET['productBasketId'])){
                 global $conn;
                 $productSelectedId = $_GET["productBasketId"];
@@ -42,11 +42,9 @@
         ?>
 
         <?php include "header.php" ?>
-        
         <br>
         <center><h1>Favourites </h1></center>
-        <br>
-
+        <br
 
         <div class="flex-container-favPage">
             <div class="flex-item-fav">
@@ -56,7 +54,7 @@
                     global $uId;
                     global$itAFav;
 
-                    //Putting into Basket
+                    //Setting sessions for the Basket
                     if(isset($_SESSION["productCartList"])){
                         $productCartArr = $_SESSION["productCartList"];
                     }else{
@@ -101,7 +99,7 @@
                                 echo "</center>";
                                 echo "<b class='alignPrice'> Price: </b> €".$row['pPrice']." <b class='rate'> Rating: </b>";
                                 
-                                //Checks the rating and creates the stars depending on its rating
+                                //Checks the rating and creates the stars depending on its rating it will show the rigt number of stars
                                 if($row['pRating'] == 5){
                                     echo "<span class='rating five'>";
                                     echo "<span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>";

@@ -24,7 +24,6 @@
         <div class="flex-container-aboutPage">
             <div class="flex-item-frontPage">
                 <img src="images/aboutImg.jpg" alt="front" id="imgForText"/>
-                <h1 id="textAlignImg">Buy Local</h1>
             </div>
         </div>
        
