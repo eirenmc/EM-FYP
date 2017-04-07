@@ -107,7 +107,7 @@
                         mail($to,$subject,$emailCustomerMsg,$headers);
                     }
 
-                    unset($_SESSION["productCartList"]);
+                    unset($_SESSION['productCartList']);
 
                 ?>
             </div>
