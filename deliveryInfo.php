@@ -1,3 +1,4 @@
+<!-- Code information about delivery -->
 <div class="flex-container-frontPage">
     <div class="flex-item-frontPageHalf">
         <h2>Delivery Information</h2>

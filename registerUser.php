@@ -76,6 +76,6 @@
             echo 'ERROR: '.$e -> getMessage();
         }
         //Redirects to the products page
-        header("Location: index.php");
+        header("Location: products.php?prodType=FV&submit1=Fruit+%26+Veg");
     }
 ?>

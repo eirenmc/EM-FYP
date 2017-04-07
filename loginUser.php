@@ -69,17 +69,10 @@
             $password = sha1($password);
             
             //Loops through the database and gets the email and password and checks it against the database
-            while(($userDB = $checkUnameData->fetch(PDO::FETCH_ASSOC)) && ($passwordDB = $checkPasswordData->fetch(PDO::FETCH_ASSOC))){
-               /* echo "Whiling ";
-                var_dump($uname);
-                var_dump($password);*/
-                
+            while(($userDB = $checkUnameData->fetch(PDO::FETCH_ASSOC)) && ($passwordDB = $checkPasswordData->fetch(PDO::FETCH_ASSOC))){              
                 //If the username and password match up with the database, the page redirects to the products page
                 if(($uname == $userDB['uName']) && ($password == $passwordDB['uPassword'])){
-                   // echo "Confirming login";
-                   header("Location: index.php");
-                  //echo '<a href="'. $_SERVER['HTTP_REFERER'] . '">Go back</a>';
- 
+                   header("Location: products.php?prodType=FV&submit1=Fruit+%26+Veg");
                 }
             }
         }catch(PDOException $e){

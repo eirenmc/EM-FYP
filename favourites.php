@@ -1,6 +1,8 @@
-<?php 
-   session_start();
-   include_once "dbCon.php";
+<?php
+    //Start or restore session variables
+    session_start();
+    //Including the database connection file
+    include_once "dbCon.php";
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +25,14 @@
                 $productSelectedId = $_GET["productBasketId"];
                 
                 try{  
+                    //Selects all the entries int eh database which match with the shopping basket it and the product id in
+                    //the database
                     $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
+                    //Binding
                     $stat->bindParam(':pId', $productSelectedId);
+                    //Executes
                     $stat->execute();
+                    //Pushes the selected products into the session array
                     array_push($_SESSION['productCartList'],$productSelectedId);         
                 }
                 catch(PDOException $e){
@@ -44,7 +51,7 @@
         <div class="flex-container-favPage">
             <div class="flex-item-fav">
                 <?php
-
+                    //Gloabl variables
                     global $productCartList;
                     global $uId;
                     global$itAFav;
@@ -62,9 +69,11 @@
                         $uId = $_SESSION["userId"];
 
                         if(!empty($_GET['productSelectFavId'])){
+                            //Holds the value of the favourite sthaat has been clicked
                             $prodSelectId = $_GET["productSelectFavId"];
                             
-                            try{  
+                            try{
+                                //Deletes from the favourites table where the product id and user id match
                                 $stmt = $conn -> prepare("DELETE FROM favourites WHERE pId = '$prodSelectId' AND uId = '$uId'");                        
                                 $stmt->execute();
                             }catch(PDOException $e){
@@ -72,7 +81,9 @@
                             }
                         }
 
-                        try{   
+                        try{  
+                            //Selects all the products that are favourites for the user who is logged in, it retrieves all the
+                            //products data by joining both tables 
                             $insertProducts = $conn->prepare("SELECT * FROM products JOIN favourites ON favourites.pId=products.pId WHERE uId = '$uId'");
                             
                             //Execute
@@ -116,17 +127,18 @@
                                     echo "<span class='scoredRating'>☆</span>";
                                     echo "</span>";
                                 }
+                                //View Product Button
                                 echo "<form action='productDetail.php' method='GET' class='formBtn'>
                                 <input type='hidden'  name='productViewId' value='".$row['pId']."'>
                                 <input class='btn ".$row['pId']."' type='submit' value='View Product'></form>";
                                 
+                                //Favourites Buttno
                                 echo "<form action='favourites.php' method='GET' class='formBtn2'>";
                                 echo "<input type='hidden'  name='productDisplayed' value='".$row['pType']."'>";
-
                                 echo "<input type='hidden'  name='productSelectFavId' value='".$row['pId']."'>";
                                 echo "<button class='favStar'>&#x2605;</button></form>";
 
-                                //Add an if statement to decide which fav button to show
+                                //Show the filled in star as the user is already on the favourites page
                                 echo "<form action='favourites.php' method='GET'>
                                 <input type='hidden'  name='productBasketId' value='".$row['pId']."'>
                                 <input type='hidden'  name='productDisplayed' value='".$row['pType']."'>

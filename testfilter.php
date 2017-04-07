@@ -21,19 +21,19 @@
             /* ------Testing -------- */
             global $conn;
             try{
-                $q = strval($_GET['d']);
+                $d = strval($_GET['d']);
                 $r = intval($_GET['r']);
                 
                 //$q = intval($_GET['q']);
     
     
-                if((!empty($_GET['d'])) || (!empty($_GET['r']))){
+               /* if((!empty($_GET['d'])) || (!empty($_GET['r']))){
                     $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$d' OR pRating = '$r'");
-                }/*else if(!empty($_GET['q'])){
-                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$q'");
+                }*/if(!empty($_GET['q'])){
+                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$d'");
                 }else if(!empty($_GET['r'])){
                     $insertProducts = $conn->prepare("SELECT * FROM products WHERE pRating = '$r'");
-                }*/else{
+                }else{
                     $insertProducts = $conn->prepare("SELECT * FROM products");
                 }
 

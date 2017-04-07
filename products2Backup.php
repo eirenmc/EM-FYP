@@ -35,7 +35,7 @@
                 echo "Hello World";
                 //Pushes the selected product into the session
                 array_push($_SESSION['productCartList'],$productSelectedId);
-               // print_r($_SESSION['productCartList']);           
+                print_r($_SESSION['productCartList']);           
             }
             catch(PDOException $e){
                 echo 'ERROR: ' . $e->getMessage();
@@ -85,7 +85,7 @@
                                 $stmt->bindParam(':pId', $pId);
 
                                 $fId = null;
-                               // print_r($uId);
+                                print_r($uId);
                                 $uId = $uId;
                                 $pId = $prodId;
                             
@@ -205,7 +205,7 @@
                                     echo "<button class='favStar'>&#x2605;</button></form>";
                                }
                             }else{
-                                echo '<button class="favStar">&#x2606;</button></form>';
+                                echo "<button class='favStar'>&#x2606;</button></form>";
                             }
                             
                            // echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
@@ -224,5 +224,3 @@
                 
             </div>
         </div>
-    </body>
-    </html>

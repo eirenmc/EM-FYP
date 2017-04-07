@@ -1,7 +1,10 @@
-<?php 
-   session_start();
-   include_once "dbCon.php";
+<?php
+    //Start or restore session variables
+    session_start();
+    //Including the database connection file
+    include_once "dbCon.php";
 ?>
+
 <!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -15,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <!-- About Page content -->
         <?php include "header.php" ?>
         
         <div class="flex-container-aboutPage">

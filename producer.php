@@ -1,6 +1,8 @@
-<?php 
-   session_start();
-   include_once "dbCon.php";
+<?php
+    //Start or restore session variables
+    session_start();
+    //Including the database connection file
+    include_once "dbCon.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +10,6 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css"/>
-
- <!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChOK4lKW97Kwc9e9Dy7EdwZudOHWnbtN8&callback=initMap"
-  type="text/javascript"></script>-->
 
         <meta charset="UTF-8">
         <meta name="description" content="Online eccomerce site of local producers">
@@ -22,16 +21,16 @@
         <?php include "header.php" ?>
         <br>
         <br>
-
         <div class="flex-container-producer">
             <div class="flex-item-producer">
                 <?php
-
+                    //Checking tthat the userId session has been set
                     if(isset($_SESSION["userId"])){
                         $uId = $_SESSION["userId"];
                     }
 
                     try{ 
+                        //Selects the producers from the database so they can later be displayed
                         $insertProducers = $conn->prepare("SELECT * FROM producers");
 
                         //Execute
@@ -49,7 +48,8 @@
                             echo "</center>";  
                             /*echo "<form action='producerDetail.php' method='GET'>
                             <input type='hidden'  name='producerViewId' value='".$row['producerId']."'>
-                            <input class='btn2 ".$row['producerId']."' type='submit' value='View Producer'></form></div>";*/
+                            <input class='btn2 ".$row['producerId']."' type='submit' value='View Producer'></form>";*/
+                            echo "</div>";
                             
                             $currentPId = $row['pId'];
                         }
@@ -60,8 +60,14 @@
                 
             </div>
         </div>
+        
         <br>
-        <iframe src="https://www.google.com/maps/d/embed?mid=1Cxlpp8xZ6U-ZvufNIRdYODxYyH8" id="producerMap"></iframe> 
+        <br><!--
+        <div id="producerLocations">
+            <center>
+                <iframe src="https://www.google.com/maps/d/embed?mid=1Cxlpp8xZ6U-ZvufNIRdYODxYyH8" width="640" height="480" id="producerMap"></iframe>
+            </center>
+        </div>-->
         <br>
         <?php include "footer.php" ?>
         </body>

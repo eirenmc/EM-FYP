@@ -9,6 +9,8 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css"/>
 
+        <script src="./js/script.js"></script>
+
         <meta charset="UTF-8">
         <meta name="description" content="Online eccomerce site of local producers">
         <meta name="keywords" content="Local Producers,eccommerce,local,buy,online,shopping">
@@ -18,31 +20,40 @@
     <body>
 <!-- Testing -->
         <?php 
-        //This code is set above all other php statements as I need to check if products are in the basket first and display 
-        //the number otherwise it requires a full page refresh or changing of pages to update the basket item total
-        if(!empty($_GET['productBasketId'])){
-            //Gets the id stored with each product
-            global $conn;
-            $productSelectedId = $_GET["productBasketId"];
-            
-            try{  
-                //Using a prepared statement to select the product that matches the id that is attached to the 
-                $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
-                $stat->bindParam(':pId', $productSelectedId);
-                $stat->execute();
+            //This code is set above all other php statements as I need to check if products are in the basket first and display 
+            //the number otherwise it requires a full page refresh or changing of pages to update the basket item total
+            if(!empty($_GET['productBasketId'])){
+                //Gets the id stored with each product
+                global $conn;
+                $productSelectedId = $_GET["productBasketId"];
+                
+                try{  
+                    //Using a prepared statement to select the product that matches the id that is attached to the 
+                    $stat = $conn->prepare('SELECT * FROM products WHERE pId = :pId');
+                    $stat->bindParam(':pId', $productSelectedId);
+                    $stat->execute();
 
-                echo "Hello World";
-                //Pushes the selected product into the session
-                array_push($_SESSION['productCartList'],$productSelectedId);
-                print_r($_SESSION['productCartList']);           
+                   // echo "Hello World";
+                    //Pushes the selected product into the session
+                    array_push($_SESSION['productCartList'],$productSelectedId);
+                    //print_r($_SESSION['productCartList']);           
+                }
+                catch(PDOException $e){
+                    echo 'ERROR: ' . $e->getMessage();
+                }
             }
-            catch(PDOException $e){
-                echo 'ERROR: ' . $e->getMessage();
+
+            if(!empty($_GET['logout'])){
+                unset($_SESSION['userId']);
+                unset($_SESSION['uname']);
+                echo "<div id='logoutBox'>
+                        <h3>You have successfully logged out</h3>
+                    </div>";
             }
-        }
         ?>
 
         <?php include "header.php" ?>
+
         <img src="images/frontImage2.jpg" alt="front intro img"/>
 
         <div class="flex-container-frontPage">
@@ -204,9 +215,7 @@
                                }
                             }else{
                                 echo "<button class='favStar'>&#x2606;</button></form>";
-                            }
-                            
-                           // echo "<input class='btn2 ".$row['pId']."' type='submit' value='Add To Favourties'></form>";           
+                            }          
 
                             //Add an if statement to decide which fav button to show
                             echo "<form action='products.php' method='GET'>
@@ -225,4 +234,10 @@
     <br>
     <?php include "deliveryInfo.php" ?>
     <?php include "footer.php" ?>
+    <script>
+        document.getElementById('logoutBox').style.display = 'block';
+        setTimeout(function() {
+            document.getElementById('logoutBox').style.display = 'none';
+        },4000);
+    </script>
 </body>
