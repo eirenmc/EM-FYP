@@ -25,11 +25,7 @@
                 $r = intval($_GET['r']);
                 
                 //$q = intval($_GET['q']);
-    
-    
-               /* if((!empty($_GET['d'])) || (!empty($_GET['r']))){
-                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$d' OR pRating = '$r'");
-                }*/if(!empty($_GET['q'])){
+                if(!empty($_GET['q'])){
                     $insertProducts = $conn->prepare("SELECT * FROM products WHERE pDietType = '$d'");
                 }else if(!empty($_GET['r'])){
                     $insertProducts = $conn->prepare("SELECT * FROM products WHERE pRating = '$r'");

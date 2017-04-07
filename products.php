@@ -47,7 +47,122 @@
         
         <br>
 
-        <?php include "filter.php" ?>
+        <?php //include "filter.php" ?>
+        <!-- Filter Start -->
+        <div class="flex-container-filter">
+            <div class="flex-item">
+                <form method="GET" action="products.php">
+                <div class="titleBar">
+                    <h2>Filter By :</h2>
+                </div>
+                <div class="ratingFilter">
+                <h3>Rating</h3>
+                <input type="radio" name="rating" value="1">
+                <span class='rating five'>
+                <span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="rating" value="2">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="rating" value="3">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="rating" value="4">
+                <span class='rating five'>
+                    <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+                <br>
+                <input type="radio" name="rating" value="5">
+                <span class='rating five'>
+                <span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span><span class='scoredRating'>☆</span>
+                </span>
+            </div>
+            <hr>
+            <div class="priceFilter">
+                <h3>Price</h3>
+                <button class="button">Low - High</button>
+                <button class="button">High - Low</button>
+            </div>
+            <hr>
+            <div class="sortFilter">
+                <h3>Sort</h3>
+                <button class="button">A - Z</button>
+                <button class="button">Z - A</button>
+            </div>
+            <hr>
+            <div class="originFilter">
+                <h3>Produced In:</h3>
+                <p>(50 mile radius from each location in included)</p>
+                <!-- <form> -->
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Clonmel">Clonmel
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Thurles">Thurles
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Cahir">Cahir
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Carrick On Suir">Carrick On Suir
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Callan">Callan
+                    </span>
+                    <br>
+                    <span class="filterCheckbox">
+                        <input type="radio" name="origin" value="Mitchlestown">Mitchlestown
+                    </span>
+               <!-- </form>-->
+            </div>
+            <hr>
+            <div class="dietFilter">
+            <h3>Dietary Requirements</h3>
+           <!-- <form> -->
+                <span class="filterCheckbox">
+                    <input type="radio" value="N" name="diet">Nut Free
+                </span> 
+                <br>
+                <span class="filterCheckbox">
+                    <input type="radio" value="O" name="diet">Organic
+                </span>
+                <br>         
+                <span class="filterCheckbox">
+                    <input type="radio" value="G" name="diet">Gluten Free
+                </span>
+                <br>
+                <span class="filterCheckbox">
+                    <input type="radio" value="L" name="diet">Lactose Intolerant
+                </span>
+                <?php
+                    global $productType;
+                    if(!empty($_GET["prodType"])){
+                        $productType = $_GET["prodType"];
+                    }else if(!empty($_GET["filterStoredType"])){
+                        $productType = $_GET["filterStoredType"];
+                    }
+                    
+                    $_SESSION['productType'] = $productType;
+                    echo $productType;
+                    echo "<input type='hidden' name='filterStoredType' value='".$_SESSION['productType']."'>";
+                ?>
+                <input class='btn2' type='submit' value='Filter Products'>      
+           <!-- </form>-->
+        </div>
+        </form>
+    </div>
+</div>
+
+        <!-- Filter End -->
 
         <div class="flex-container-prodPage">
             <div class="flex-item-product">
@@ -55,6 +170,12 @@
 
                     global $productCartList;
                     global $uId;
+                    global $typePage;
+
+                   /* $page = $_SERVER["REQUEST_URI"];
+                    $_SESSION['page'] = $page;
+                    $typePage = "http://".$_SERVER['SERVER_NAME'].$_SESSION['page'];
+                    //echo "http://".$_SERVER['SERVER_NAME'].$_SESSION['page'];*/
 
                     if(isset($_SESSION["productCartList"])){
                         $productCartArr = $_SESSION["productCartList"];
@@ -67,6 +188,9 @@
                         $uId = $_SESSION["userId"];
                     }
 
+                    if(isset($_SESSION["userId"])){
+                        $uId = $_SESSION["userId"];
+                    }
                     $prodDisplayType = $_GET["prodType"];
                     $productDisplayed = $_GET['productDisplayed'];
 
@@ -108,20 +232,160 @@
                         }
                     }
 
+                    $type;
+
+                    if(!empty($_GET['filterStoredType'])){
+                        $type = $_GET['filterStoredType'];
+                        echo "Type chosen is : ".$type;
+                    }
+                    if(!empty($_GET['diet'])){
+                        $diet = $_GET['diet'];
+                        echo "Diet chosen is : ".$diet;
+                    }
+                    if(!empty($_GET['origin'])){
+                        $origin = $_GET['origin'];
+                        echo "origin chosen is : ".$origin;
+                    }
+                    if(!empty($_GET['rating'])){
+                        $rating = $_GET['rating'];
+                        echo "rating chosen is : ".$rating;
+                    }
+                    
                     try{   
-                        if($prodDisplayType == 'FV' || $productDisplayed == 'FV'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
-                        }else if($prodDisplayType == 'MPF' || $productDisplayed == 'MPF'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
-                        }else if($prodDisplayType == 'BK' || $productDisplayed == 'BK'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
-                        }else if($prodDisplayType == 'D' || $productDisplayed == 'D'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D'");
-                        }else if($prodDisplayType == 'BD' || $productDisplayed == 'BD'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
+                        if($prodDisplayType == 'FV' || $productDisplayed == 'FV' || $type == 'FV'){
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV' AND pRating='$rating'");
+                                }
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='FV'");
+                            }
+                        }else if($prodDisplayType == 'MPF' || $productDisplayed == 'MPF' || $type == 'MPF'){
+
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF' AND pRating='$rating'");
+                                }
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='MPF'");
+                            }
+
+                        }else if($prodDisplayType == 'BK' || $productDisplayed == 'BK' || $type == 'BK'){
+                            
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK' AND pRating='$rating'");
+                                }
+
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BK'");
+                            }
+                        }else if($prodDisplayType == 'D' || $productDisplayed == 'D' || $type == 'D'){
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D' AND pRating='$rating'");
+                                }
+
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='D'");
+                            }
+                        }else if($prodDisplayType == 'BD' || $productDisplayed == 'BD' || $type == 'BD'){
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD' AND pRating='$rating'");
+                                }
+
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='BD'");
+                            }
                         }else if($prodDisplayType == 'DE' || $productDisplayed == 'DE'){
-                            $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
-                        }else{
+                            if(!empty($_GET['filterStoredType'])){
+                                
+                                if((!empty($_GET['diet'])) && (!empty($_GET['origin'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pDietType='$diet' AND pOrigin='$origin' AND pRating='$rating'");
+                                }else if((!empty($_GET['rating'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['origin']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pDietType='$diet' AND pOrigin='$origin'");
+                                }else if((!empty($_GET['diet'])) && (!empty($_GET['rating']))){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pDietType='$diet' AND pRating='$rating'");
+                                }else if(!empty($_GET['diet'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pDietType='$diet'");
+                                }else if(!empty($_GET['origin'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pOrigin='$origin'");
+                                }else if(!empty($_GET['rating'])){
+                                    $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE' AND pRating='$rating'");
+                                }
+
+                            }else{
+                                $insertProducts = $conn->prepare("SELECT * FROM products WHERE pType='DE'");
+                            }
+                        else{
                             $insertProducts = $conn->prepare("SELECT * FROM products");
                         }
 
@@ -225,4 +489,48 @@
             </div>
         </div>
     </body>
+    <script>
+      /*  function showDiet(str) {
+            if(str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else { 
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET","testfilter.php?d="+str,true);
+                xmlhttp.send();
+            }
+        }
+
+        function showRating(str) {
+            if(str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            } else { 
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("txtHint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET","testfilter.php?r="+str,true);
+                xmlhttp.send();
+            }*/
+    </script>
     </html>

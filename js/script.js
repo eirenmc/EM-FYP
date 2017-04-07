@@ -1,3 +1,4 @@
+/*
 window.onload = init;
 
 function init(){
@@ -47,4 +48,4 @@ function init(){
             }
         }
     }
-}
+}*/
